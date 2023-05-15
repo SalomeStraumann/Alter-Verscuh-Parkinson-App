@@ -292,7 +292,10 @@ if delete_med:
 
 
 # Konvertieren der Daten in ein Pandas DataFrame - Daten aus dem Abschnitt "Medikamente hinzufÃ¼gen regelmÃ¤ssige Einnahme"
+
+medi_list = load_key(api_key_med, bin_id_med, username)
 medi_list_data = pd.DataFrame(medi_list)
+st.table(medi_list_data)
 
 
 # Index auf Medikament setzen
