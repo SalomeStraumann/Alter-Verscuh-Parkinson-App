@@ -40,16 +40,6 @@ elif authentication_status == None:
     st.warning('Please enter your username and password')
     st.stop()
 
-# st.write(username)
-
-# test = load_key(api_key_med, bin_id_med, username)
-# #st.write(test[medis])
-# st.write(test)
-
-# test_sick = load_key(api_key_sick, bin_id_sick, username)
-# #st.write(test[medis])
-# st.write(test_sick)
-
 # Hauptseite
 
 # Titel der App
@@ -210,22 +200,29 @@ if delete:
     
 # Ãœberschrift  Diagram
 st. header(':blue[Limitation im Verlauf der Zeit]')
- 
 
-# Konvertieren der Daten in ein Pandas DataFrame - Daten aus dem Abschnitt "Befinden" und "Medikamente"
+# Lade die Daten und konvertiere sie in ein DataFrame
 feeling_list = load_key(api_key_sick, bin_id_sick, username)
 new_feeling_data = pd.DataFrame(feeling_list)
-st.table(new_feeling_data)
-
-
-# Index auf Datum setzen
+new_feeling_data['Datum und Zeit'] = pd.to_datetime(new_feeling_data['Datum und Zeit'])
 new_feeling_data = new_feeling_data.set_index('Datum und Zeit')
 
+# Benutzereingabe für die Zeitspanne
+time_periods = ['Letzte Woche', 'Letzter Monat', 'Letzte 3 Monate']
+selected_time_period = st.selectbox('Zeitspanne auswählen:', time_periods)
 
-# Darstellung der Daten in einem Diagram
+# Filtere die Daten basierend auf der ausgewählten Zeitspanne
+if selected_time_period == 'Letzte Woche':
+    filtered_data = new_feeling_data.last('7D')
+elif selected_time_period == 'Letzter Monat':
+    filtered_data = new_feeling_data.last('1M')
+elif selected_time_period == 'Letzte 3 Monate':
+    filtered_data = new_feeling_data.last('3M')
+else:
+    filtered_data = new_feeling_data  # Kein Filter angewendet
 
-# Liniendiagramm "Limitation durch die Symptome im Verlauf der Zeit" anzeigen
-st.line_chart(new_feeling_data['Stärke der Limitation'])
+# Liniendiagramm anzeigen
+st.line_chart(filtered_data['Stärke der Limitation'])
 
 
 
