@@ -204,7 +204,10 @@ st. header(':blue[Limitation im Verlauf der Zeit]')
 # Lade die Daten und konvertiere sie in ein DataFrame
 feeling_list = load_key(api_key_sick, bin_id_sick, username)
 new_feeling_data = pd.DataFrame(feeling_list)
-new_feeling_data['Datum und Zeit'] = pd.to_datetime(new_feeling_data['Datum und Zeit'])
+#new_feeling_data['Datum und Zeit'] = pd.to_datetime(new_feeling_data['Datum und Zeit'])
+#new_feeling_data = new_feeling_data.set_index('Datum und Zeit')
+
+# Index auf Datum setzen
 new_feeling_data = new_feeling_data.set_index('Datum und Zeit')
 
 # Benutzereingabe für die Zeitspanne
@@ -221,11 +224,9 @@ elif selected_time_period == 'Letzte 3 Monate':
 else:
     filtered_data = new_feeling_data  # Kein Filter angewendet
 
-# Liniendiagramm erstellen
-chart = st.line_chart(filtered_data['Stärke der Limitation'])
-
-# X-Achse mit Datum und Zeit beschriften
-chart.x_axis_format = 'datetime'
+# Darstellung der Daten in einem Diagram
+# Liniendiagramm "Limitation durch die Symptome im Verlauf der Zeit" anzeigen
+st.line_chart(new_feeling_data['Stärke der Limitation'])
 
 
 
