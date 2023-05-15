@@ -59,16 +59,24 @@ if uploaded_image is not None:
     st.image(image, width=400)
     
     # Benutzerbild speichern
-    user_images = load_key(api_key_bil, bin_id_bil, "user_images", {})
-    user_images[username] = image
-    save_key(api_key_bil, bin_id_bil, "user_images", user_images)
+    user_images = load_key(api_key_bil, bin_id_bil, username)
+    record_bil = save_key(api_key_bil, bin_id_bil, username, user_images)
+    if 'message' in record_bil:
+        st.error(record_bil['message'])
 else:
     # Benutzerbild abrufen, falls vorhanden
-    user_images = load_key(api_key_bil, bin_id_bil, "user_images", {})
+    user_images = load_key(api_key_bil, bin_id_bil, username)
     user_image = user_images.get(username)
     if user_image is not None:
         st.image(user_image, width=400)
 
+        
+
+
+        
+        
+        
+        
 
 # Seitenleiste
 # Eingabefelder für Datum und Uhrzeit
