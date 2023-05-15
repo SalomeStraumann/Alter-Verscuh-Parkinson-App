@@ -201,33 +201,37 @@ if delete:
 # Ãœberschrift  Diagram
 st. header(':blue[Limitation im Verlauf der Zeit]')
 
+import matplotlib.pyplot as plt
+
 # Lade die Daten und konvertiere sie in ein DataFrame
 feeling_list = load_key(api_key_sick, bin_id_sick, username)
 new_feeling_data = pd.DataFrame(feeling_list)
 new_feeling_data['Datum und Zeit'] = pd.to_datetime(new_feeling_data['Datum und Zeit'])
 new_feeling_data = new_feeling_data.set_index('Datum und Zeit')
 
-
 # Benutzereingabe für die Zeitspanne
-time_periods = ['Heute','Letzte Woche', 'Letzter Monat', 'Letzte 3 Monate','Letzte 6 Monate']
+time_periods = ['Letzte Woche', 'Letzter Monat', 'Letzte 3 Monate']
 selected_time_period = st.selectbox('Zeitspanne auswählen:', time_periods)
 
 # Filtere die Daten basierend auf der ausgewählten Zeitspanne
-if selected_time_period == 'Heute':
-    filtered_data = new_feeling_data.last('1D')
-elif selected_time_period == 'Letzte Woche':
+if selected_time_period == 'Letzte Woche':
     filtered_data = new_feeling_data.last('7D')
 elif selected_time_period == 'Letzter Monat':
     filtered_data = new_feeling_data.last('1M')
 elif selected_time_period == 'Letzte 3 Monate':
     filtered_data = new_feeling_data.last('3M')
-elif selected_time_period == 'Letzte 6 Monate':
-    filtered_data = new_feeling_data.last('6M')
 else:
     filtered_data = new_feeling_data  # Kein Filter angewendet
 
-# Liniendiagramm anzeigen
-st.line_chart(filtered_data['Stärke der Limitation'])
+# Liniendiagramm erstellen
+fig, ax = plt.subplots()
+filtered_data['Stärke der Limitation'].plot(ax=ax)
+
+# X-Achse mit Datum und Zeit beschriften
+ax.set_xticklabels(filtered_data.index.strftime('%Y-%m-%d %H:%M:%S'), rotation=45)
+
+# Diagramm anzeigen
+st.pyplot(fig)
 
 
 
