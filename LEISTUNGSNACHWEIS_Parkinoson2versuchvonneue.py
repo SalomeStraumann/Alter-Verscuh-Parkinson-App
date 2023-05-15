@@ -57,12 +57,14 @@ uploaded_image = st.file_uploader("Lade dein Benutzerbild hoch", type=["jpg", "j
 if uploaded_image is not None:
     image = Image.open(uploaded_image)
     st.image(image, width=400)
-    
+
+    submitbild = st.sidebar.button('Bild Speichern')
+    if submitbild:
     # Benutzerbild speichern
-    user_images = load_key(api_key_bil, bin_id_bil, username)
-    record_bil = save_key(api_key_bil, bin_id_bil, username, user_images)
-    if 'message' in record_bil:
-        st.error(record_bil['message'])
+        user_images = load_key(api_key_bil, bin_id_bil, username)
+        record_bil = save_key(api_key_bil, bin_id_bil, username, user_images)
+        if 'message' in record_bil:
+            st.error(record_bil['message'])
 else:
     # Benutzerbild abrufen, falls vorhanden
     user_images = load_key(api_key_bil, bin_id_bil, username)
