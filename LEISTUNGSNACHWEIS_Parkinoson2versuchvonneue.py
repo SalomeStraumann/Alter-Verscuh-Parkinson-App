@@ -230,8 +230,8 @@ filtered_data['Stärke der Limitation'].plot(ax=ax)
 ax.set_xticklabels(filtered_data.index.strftime('%Y-%m-%d %H:%M:%S'), rotation=45)
 
 # Diagramm anzeigen
-st.pyplot(fig)
-
+#st.pyplot(fig)
+st.line_chart(fig['Stärke der Limitation'])
 
 
 
