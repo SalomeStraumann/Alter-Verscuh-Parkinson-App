@@ -201,7 +201,6 @@ if delete:
 # Ãœberschrift  Diagram
 st. header(':blue[Limitation im Verlauf der Zeit]')
 
-
 # Lade die Daten und konvertiere sie in ein DataFrame
 feeling_list = load_key(api_key_sick, bin_id_sick, username)
 new_feeling_data = pd.DataFrame(feeling_list)
@@ -223,16 +222,10 @@ else:
     filtered_data = new_feeling_data  # Kein Filter angewendet
 
 # Liniendiagramm erstellen
-fig, ax = plt.subplots()
-filtered_data['Stärke der Limitation'].plot(ax=ax)
+chart = st.line_chart(filtered_data['Stärke der Limitation'])
 
 # X-Achse mit Datum und Zeit beschriften
-ax.set_xticklabels(filtered_data.index.strftime('%Y-%m-%d %H:%M:%S'), rotation=45)
-
-# Diagramm anzeigen
-#st.pyplot(fig)
-st.line_chart(fig['Stärke der Limitation'])
-
+chart.x_axis_format = 'datetime'
 
 
 
