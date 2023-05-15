@@ -110,3 +110,54 @@ def save_key(api_key_med, bin_id_med, key_med, data_med):
         record_med[key_med] = data_med
     response_med = requests.put(url_med, headers=headers_med, json=record_med).json()
     return response_med
+
+
+# Bild
+def load_data(api_key_bil, bin_id_bil):
+    """
+    Load entire bin
+    """
+    url_bil = BIN_API_URL + '/' + bin_id_bil + '/latest'
+    headers_bil = {'X-Master-Key': api_key_bil}
+    response_bil = requests.get(url_bil, headers=headers_bil).json()
+    return response_bil['record']
+
+
+def save_data(api_key_bil, bin_id_bil, data_bil):
+    """
+    Save entire bin
+    """
+    url_bil = BIN_API_URL + '/' + bin_id_bil
+    headers_bil = {'X-Master-Key': api_key_bil, 'Content-Type': 'application/json'}
+    response_bil = requests.put(url_bil, headers=headers_bil, json=data_bil).json()
+    return response_bil
+
+
+def load_key(api_key_bil, bin_id_bil, key_bil, empty_value=[]):
+    """
+    Load key from bin
+    """
+    url_bil = BIN_API_URL + '/' + bin_id_bil + '/latest'
+    headers_bil = {'X-Master-Key': api_key_bil}
+    response_bil = requests.get(url_bil, headers=headers_bil).json()
+    record_bil = response_bil['record']
+    if key_bil in record_bil:
+        return record_bil[key_bil]
+    else:
+        return empty_value
+
+
+def save_key(api_key_bil, bin_id_bil, key_bil, data_bil):
+    """
+    Save key to bin
+    """
+    url_bil = BIN_API_URL + '/' + bin_id_bil
+    headers_bil = {'X-Master-Key': api_key_bil, 'Content-Type': 'application/json'}
+    response_bil = requests.get(url_bil, headers=headers_bil).json()
+    record_bil = response_bil['record']
+    if type(record_bil) != dict:
+        record_bil = {key_bil: data_bil}  # generate new dict
+    else:
+        record_bil[key_bil] = data_bil
+    response_bil = requests.put(url_bil, headers=headers_bil, json=record_bil).json()
+    return response_bil
