@@ -215,7 +215,7 @@ selected_time_period = st.selectbox('Zeitspanne auswählen:', time_periods)
 if selected_time_period == 'Letzte Woche':
     filtered_data = new_feeling_data.last('7D')
 elif selected_time_period == 'Letzter Monat':
-    filtered_data = new_feeling_data.last('1M')
+    filtered_data = new_feeling_data.last('30D')
 elif selected_time_period == 'Letzte 3 Monate':
     filtered_data = new_feeling_data.last('3M')
 else:
