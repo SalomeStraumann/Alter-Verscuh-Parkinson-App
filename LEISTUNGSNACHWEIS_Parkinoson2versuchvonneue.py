@@ -209,7 +209,7 @@ new_feeling_data = new_feeling_data.set_index('Datum und Zeit')
 
 
 # Benutzereingabe für die Zeitspanne
-time_periods = ['Letzte Woche', 'Letzter Monat', 'Letzte 3 Monate']
+time_periods = ['Heute','Letzte Woche', 'Letzter Monat', 'Letzte 3 Monate','Letzte 6 Monate']
 selected_time_period = st.selectbox('Zeitspanne auswählen:', time_periods)
 
 # Filtere die Daten basierend auf der ausgewählten Zeitspanne
@@ -221,7 +221,7 @@ elif selected_time_period == 'Letzter Monat':
     filtered_data = new_feeling_data.last('1M')
 elif selected_time_period == 'Letzte 3 Monate':
     filtered_data = new_feeling_data.last('3M')
-elif selected_time_period == 'Letzte 6 Monat':
+elif selected_time_period == 'Letzte 6 Monate':
     filtered_data = new_feeling_data.last('6M')
 else:
     filtered_data = new_feeling_data  # Kein Filter angewendet
