@@ -1,7 +1,7 @@
-# Import der benötigten Bibliotheken
+# Import der benÃ¶tigten Bibliotheken
 import streamlit as st
 import pandas as pd
-#import json
+import json
 import datetime
 from PIL import Image
 from jsonbin import load_key, save_key
@@ -54,11 +54,11 @@ elif authentication_status == None:
 
 # Titel der App
 st.title("Parkinson Tracker")
-# Begr�ssung
+# Begrüssung
 text_before = "Hallo,"
 text_after = "!"
 st.header("{} {}{}".format(text_before, username, text_after))
-# Information f�r den Nutzer
+# Information für den Nutzer
 st.warning("Bitte beantworte die Fragen in der Seitenleiste")
 
 # Bild
@@ -71,7 +71,7 @@ else:
 
 
 # Seitenleiste
-# Eingabefelder f�r Datum und Uhrzeit
+# Eingabefelder für Datum und Uhrzeit
 date = st.sidebar.date_input("Datum", datetime.date(2023, 5, 20))
 time = st.sidebar.time_input("Uhrzeit", datetime.time(12, 00))
 # Kombination von Datum und Uhrzeit zu einem Datetime-Objekt
@@ -80,31 +80,31 @@ datetime_obj = datetime.datetime.combine(date, time)
 datetime_string = datetime_obj.strftime('%Y-%m-%d, %H:%M')
 # Untertitel Seitenleiste - Befinden
 st.sidebar.header(':blue[Befinden]')
-# Liste der verfügbaren Symptome
+# Liste der verfÃ¼gbaren Symptome
 symptoms = [
-    'Taubheitsgef�hl in den Beinen', 
-    'Taubheitsgef�hl in den Armen', 
+    'Taubheitsgefühl in den Beinen', 
+    'Taubheitsgefühl in den Armen', 
     'Kribbeln in den Beinen', 
     'Kribbeln in den Armen',
     'Tremor (Zittern)',
     'Steifheit der Muskeln',
     'Langsame Bewegungen'
-    'Rasche Erschöpfung', 
+    'Rasche ErschÃ¶pfung', 
     'Probleme bei der Darmentleerung', 
     'Probleme bei der Blasenentleerung', 
-    'Gangstörungen', 
-    'Gleichgewichtsstörungen', 
-    'Sehstörungen', 
-    'Lähmungserscheinungen', 
+    'GangstÃ¶rungen', 
+    'GleichgewichtsstÃ¶rungen', 
+    'SehstÃ¶rungen', 
+    'LÃ¤hmungserscheinungen', 
     'Globale Schmerzen',
     'Keine Symptome'
 ]
-# Multiselect-Widget für die verfügbaren Symptome
+# Multiselect-Widget fÃ¼r die verfÃ¼gbaren Symptome
 selected_symptoms = st.sidebar.multiselect(
     'Symptome', 
     symptoms
     )
-# Eingabefelder für die Schweregrade der ausgewählten Symptome
+# Eingabefelder fÃ¼r die Schweregrade der ausgewÃ¤hlten Symptome
 severity_levels = {}
 for symptom in selected_symptoms:
     severity_level = st.sidebar.number_input(
@@ -115,56 +115,56 @@ for symptom in selected_symptoms:
     )
     severity_levels[symptom] = severity_level
 # Einschub auf der Hauptseite
-# Anzeige der ausgewählten Symptome und Schweregrade auf der Hauptseite, falls Eingabefeld ausgefüllt
+# Anzeige der ausgewÃ¤hlten Symptome und Schweregrade auf der Hauptseite, falls Eingabefeld ausgefÃ¼llt
 if selected_symptoms:
-    st.write(':blue[Ausgewählte Symptome und Schweregrade:]')
+    st.write(':blue[AusgewÃ¤hlte Symptome und Schweregrade:]')
     for symptom in selected_symptoms:
         severity_level = severity_levels[symptom]
         st.write(f'- {symptom}: {severity_level}')
-# Speichern der ausgewählten Symptome und Schweregrade in einem Dictionary
+# Speichern der ausgewÃ¤hlten Symptome und Schweregrade in einem Dictionary
     symptoms_and_severity = {symptom: severity_levels[symptom] for symptom in selected_symptoms}
 else:
-    st.write('Keine Symptome ausgew�hlt')
+    st.write('Keine Symptome ausgewählt')
 # Seitenleiste
-# Slider für Stärke der Limitation in der Gesamtheit
+# Slider fÃ¼r StÃ¤rke der Limitation in der Gesamtheit
 feeling = st.sidebar.slider('Wie stark limitieren dich die Symptome gerade im Alltag?', 0, 10, 1)
 # Dictionary, das jedem Schweregrad eine Beschreibung zuordnet
 severity_levels_lim = {
-    0: '�berhaupt nicht',
+    0: 'Überhaupt nicht',
     1: 'Kaum',
-    2: 'Geringf�gig',
+    2: 'Geringfügig',
     3: 'Leicht',
     4: 'Etwas',
-    5: 'Mässig',
+    5: 'MÃ¤ssig',
     6: 'Deutlich',
     7: 'Stark',
     8: 'Sehr stark',
-    9: '�usserst',
+    9: 'Äusserst',
     10:'Extrem'
 }
 # Beschreibungen der Schweregrade werden unter dem Slider angezeigt
 st.sidebar.write(severity_levels_lim[feeling])
 # Untertitel Seitenleiste - Kommentare
 st.sidebar.header(':blue[Kommentare]')
-# Eingabefeld, um Kommentare hinzuzufügen
+# Eingabefeld, um Kommentare hinzuzufÃ¼gen
 comment = st.sidebar.text_input('Hast du noch weitere relevante Bemerkungen?')
 # Einschub auf der Hauptseite
-# Anzeige der Kommentare auf der Hauptseite, falls Eingabefeld ausgefüllt
+# Anzeige der Kommentare auf der Hauptseite, falls Eingabefeld ausgefÃ¼llt
 if comment:
     st.write('Kommentar:')
     st.write(comment)
 else:
-    st.write('Kein Kommentar hinzugef�gt')
+    st.write('Kein Kommentar hinzugefügt')
 # Untertitel Seitenleiste - Medikamente
 st.sidebar.header(':blue[Medikamente]')
-# Eingabefeld, um einmalige Medikamenteneinnahme hinzuzufügen
+# Eingabefeld, um einmalige Medikamenteneinnahme hinzuzufÃ¼gen
 add_medication = st.sidebar.text_input(
-    'Medikament inklusive Dosierung hinzuf�gen :blue[einmalige Einnahme]'
+    'Medikament inklusive Dosierung hinzufügen :blue[einmalige Einnahme]'
     )
 
 # Button zum Speichern der Daten
 submit = st.sidebar.button('Speichern')
-delete = st.sidebar.button("Lezter Eintrag l�schen")
+delete = st.sidebar.button("Lezter Eintrag löschen")
 
 
 
@@ -175,13 +175,13 @@ delete = st.sidebar.button("Lezter Eintrag l�schen")
 
 # Darstellung der Daten auf der Hauptseite - Daten aus dem Abschnitt "Befinden" und "Medikamente"
 
-# Funktion, um Daten der Tabelle "Krankheitsverlauf" hizuzufügen
+# Funktion, um Daten der Tabelle "Krankheitsverlauf" hizuzufÃ¼gen
 if submit:
     st.sidebar.write('Deine Daten wurden gespeichert.')
     st.balloons()   
     new_feeling = {
         "Datum und Zeit" : datetime_string,
-        "St�rke der Limitation": feeling,
+        "Stärke der Limitation": feeling,
         "Symptome und Schweregrade" : symptoms_and_severity,
         "Medikament und Dosierung" : add_medication,
         "Kommentare" :comment
@@ -197,7 +197,7 @@ else:
  
     
  
-# L�schen des letzten Eintrags
+# Löschen des letzten Eintrags
 if delete:
     # delete last entry
     feeling_list = load_key(api_key_sick, bin_id_sick, username)
@@ -208,7 +208,7 @@ if delete:
 
  
     
-# Überschrift  Diagram
+# Ãœberschrift  Diagram
 st. header(':blue[Limitation im Verlauf der Zeit]')
  
 
@@ -225,44 +225,44 @@ new_feeling_data = new_feeling_data.set_index('Datum und Zeit')
 # Darstellung der Daten in einem Diagram
 
 # Liniendiagramm "Limitation durch die Symptome im Verlauf der Zeit" anzeigen
-st.line_chart(new_feeling_data['Stärke der Limitation'])
+st.line_chart(new_feeling_data['StÃ¤rke der Limitation'])
 
 
 
 
 
-# Einschub auf der Seitenleiste - Medikamente zur regelmässigen Einnahme
+# Einschub auf der Seitenleiste - Medikamente zur regelmÃ¤ssigen Einnahme
 
-# Eingabefeld, um regelmässig einzunehmende Medikamente hinzuzufügen
+# Eingabefeld, um regelmÃ¤ssig einzunehmende Medikamente hinzuzufÃ¼gen
 add_current_medication = st.sidebar.text_input(
-    "Medikament hinzufügen :blue[regelmässige Einnahme]"
+    "Medikament hinzufÃ¼gen :blue[regelmÃ¤ssige Einnahme]"
     )
 
 
-# Eingabefeld, um Einnahmezeiten der regelmässig einzunehmenden Medikamente hinzuzufügen
+# Eingabefeld, um Einnahmezeiten der regelmÃ¤ssig einzunehmenden Medikamente hinzuzufÃ¼gen
 add_current_medication_dose = st.sidebar.text_input(
      "Dosierung"
      )
 
 
-# Eingabefeld, um Einnahmezeiten der regelmässig einzunehmenden Medikamente hinzuzufügen
+# Eingabefeld, um Einnahmezeiten der regelmÃ¤ssig einzunehmenden Medikamente hinzuzufÃ¼gen
 add_current_medication_time = st.sidebar.text_input(
      "Einnahmezeiten"
      )
     
 
 # Zweiter Button zum Speichern der Medikamente
-submit_med = st.sidebar.button("zur aktuellen Medikamentenliste hinzufügen")
-delete_med = st.sidebar.button("Leztes Medikament l�schen")
+submit_med = st.sidebar.button("zur aktuellen Medikamentenliste hinzufÃ¼gen")
+delete_med = st.sidebar.button("Leztes Medikament löschen")
 
 
 
 
-# Darstellung der Daten auf der Hauptseite - Daten aus dem Abschnitt "Medikamente hinzufügen regelmässige Einnahme"
+# Darstellung der Daten auf der Hauptseite - Daten aus dem Abschnitt "Medikamente hinzufÃ¼gen regelmÃ¤ssige Einnahme"
 
-# Funktion, um Daten der Tabelle "Medikamente" hizuzufügen
+# Funktion, um Daten der Tabelle "Medikamente" hizuzufÃ¼gen
 if submit_med:
-    st.sidebar.write('Das Medikament wurde zur Liste hinzugefügt.')
+    st.sidebar.write('Das Medikament wurde zur Liste hinzugefÃ¼gt.')
     st.balloons()   
     current_medication = {
     "Medikament" : add_current_medication,
@@ -280,7 +280,7 @@ else:
  
     
  
-# L�schen des letzten Eintrags
+# Löschen des letzten Eintrags
 if delete_med:
     # delete last entry
     medi_list = load_key(api_key_med, bin_id_med, username)
@@ -291,7 +291,7 @@ if delete_med:
 
 
 
-# Konvertieren der Daten in ein Pandas DataFrame - Daten aus dem Abschnitt "Medikamente hinzufügen regelmässige Einnahme"
+# Konvertieren der Daten in ein Pandas DataFrame - Daten aus dem Abschnitt "Medikamente hinzufÃ¼gen regelmÃ¤ssige Einnahme"
 medi_list_data = pd.DataFrame(medi_list)
 
 
@@ -302,7 +302,7 @@ medi_list_data = medi_list_data.set_index('Medikament')
 
 # Anpassung der Darstellung auf der Hauptseite
 
-# Überschrift
+# Ãœberschrift
 st. header(":blue[Deine Daten auf einen Blick]")
 
 # Darstellung der Daten auf der Hauptseite in zwei Tabs
