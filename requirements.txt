@@ -2,3 +2,4 @@ pandas
 datetime
 pillow
 streamlit_authenticator
+matplotlib.pyplot
