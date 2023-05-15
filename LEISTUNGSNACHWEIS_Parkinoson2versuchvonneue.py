@@ -16,7 +16,8 @@ api_key_med = jsonbin_secrets["api_key_med"]
 bin_id_med = jsonbin_secrets["bin_id_med"]
 api_key_sick = jsonbin_secrets["api_key_sick"]
 bin_id_sick = jsonbin_secrets["bin_id_sick"]
-
+api_key_bil = jsonbin_secrets["api_key_bil"]
+bin_id_bil = jsonbin_secrets["bin_id_bil"]
 
 # -------- user login --------
 with open('config.yaml') as file:
@@ -51,13 +52,20 @@ st.header("{} {}{}".format(text_before, username, text_after))
 # Information für den Nutzer
 st.warning("Bitte beantworte die Fragen in der Seitenleiste")
 
-# Bild
-if username == "sara":
-    image_sara = Image.open("sara.jpg")
-    st.image(image_sara, width = 400)
+
+# Nutzerbild hochladen
+uploaded_image = st.file_uploader("Lade dein Benutzerbild hoch", type=["jpg", "jpeg", "png"])
+if uploaded_image is not None:
+    image = Image.open(uploaded_image)
+    st.image(image, width=400)
+    
+    # Benutzerbild speichern
+    save_key(api_key_bil, bin_id_bil, f"user_{username}_image", image)
 else:
-    image = Image.open("Maya.jpg")
-    st.image(image, width = 400)
+    # Benutzerbild abrufen, falls vorhanden
+    user_image = load_key(api_key_bil, bin_id_bil, f"user_{username}_image")
+    if user_image is not None:
+        st.image(user_image, width=400)
 
 
 # Seitenleiste
