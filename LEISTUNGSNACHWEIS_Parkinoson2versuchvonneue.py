@@ -8,7 +8,7 @@ from jsonbin import load_key, save_key
 import yaml
 from yaml.loader import SafeLoader
 import streamlit_authenticator as stauth
-
+import matplotlib.pyplot as plt
 
 # -------- load secrets for jsonbin.io --------
 jsonbin_secrets = st.secrets["jsonbin"]
@@ -201,7 +201,6 @@ if delete:
 # Ãœberschrift  Diagram
 st. header(':blue[Limitation im Verlauf der Zeit]')
 
-import matplotlib.pyplot as plt
 
 # Lade die Daten und konvertiere sie in ein DataFrame
 feeling_list = load_key(api_key_sick, bin_id_sick, username)
