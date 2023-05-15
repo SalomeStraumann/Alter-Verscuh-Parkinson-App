@@ -52,7 +52,6 @@ st.header("{} {}{}".format(text_before, username, text_after))
 # Information für den Nutzer
 st.warning("Bitte beantworte die Fragen in der Seitenleiste")
 
-
 # Nutzerbild hochladen
 uploaded_image = st.file_uploader("Lade dein Benutzerbild hoch", type=["jpg", "jpeg", "png"])
 if uploaded_image is not None:
@@ -60,10 +59,13 @@ if uploaded_image is not None:
     st.image(image, width=400)
     
     # Benutzerbild speichern
-    save_key(api_key_bil, bin_id_bil, f"user_{username}_image", image)
+    user_images = load_key(api_key_bil, bin_id_bil, "user_images", {})
+    user_images[username] = image
+    save_key(api_key_bil, bin_id_bil, "user_images", user_images)
 else:
     # Benutzerbild abrufen, falls vorhanden
-    user_image = load_key(api_key_bil, bin_id_bil, f"user_{username}_image")
+    user_images = load_key(api_key_bil, bin_id_bil, "user_images", {})
+    user_image = user_images.get(username)
     if user_image is not None:
         st.image(user_image, width=400)
 
