@@ -157,12 +157,6 @@ submit = st.sidebar.button('Speichern')
 delete = st.sidebar.button("Lezter Eintrag löschen")
 
 
-
-
-
-
-
-
 # Darstellung der Daten auf der Hauptseite - Daten aus dem Abschnitt "Befinden" und "Medikamente"
 
 # Funktion, um Daten der Tabelle "Krankheitsverlauf" hizuzufÃ¼gen
@@ -204,8 +198,6 @@ st. header(':blue[Limitation im Verlauf der Zeit]')
 # Lade die Daten und konvertiere sie in ein DataFrame
 feeling_list = load_key(api_key_sick, bin_id_sick, username)
 new_feeling_data = pd.DataFrame(feeling_list)
-#new_feeling_data['Datum und Zeit'] = pd.to_datetime(new_feeling_data['Datum und Zeit'])
-#new_feeling_data = new_feeling_data.set_index('Datum und Zeit')
 
 # Index auf Datum setzen
 new_feeling_data = new_feeling_data.set_index('Datum und Zeit')
@@ -287,19 +279,16 @@ if delete_med:
     record_med = save_key(api_key_med, bin_id_med, username, medi_list)
     if 'message' in record_med:
         st.error(record_med['message'])
-
-
+        
 
 # Konvertieren der Daten in ein Pandas DataFrame - Daten aus dem Abschnitt "Medikamente hinzufÃ¼gen regelmÃ¤ssige Einnahme"
 
 medi_list = load_key(api_key_med, bin_id_med, username)
 medi_list_data = pd.DataFrame(medi_list)
-st.table(medi_list_data)
 
 
 # Index auf Medikament setzen
 medi_list_data = medi_list_data.set_index('Medikament')
-
 
 
 # Anpassung der Darstellung auf der Hauptseite
