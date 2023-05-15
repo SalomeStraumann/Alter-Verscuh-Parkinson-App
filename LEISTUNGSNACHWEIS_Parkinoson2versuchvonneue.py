@@ -211,16 +211,16 @@ new_feeling_data = pd.DataFrame(feeling_list)
 new_feeling_data = new_feeling_data.set_index('Datum und Zeit')
 
 # Benutzereingabe für die Zeitspanne
-time_periods = ['Letzte Woche', 'Letzter Monat', 'Letzte 3 Monate']
+time_periods = ['Heute', 'Letzte Woche', 'Letzter Monat']
 selected_time_period = st.selectbox('Zeitspanne auswählen:', time_periods)
 
 # Filtere die Daten basierend auf der ausgewählten Zeitspanne
-if selected_time_period == 'Letzte Woche':
-    filtered_data = new_feeling_data.tail(7)  # Filtert die letzten 7 Einträge
+if selected_time_period == 'Heute':
+    filtered_data = new_feeling_data.tail(5)  # Filtert die letzten 7 Einträge
+elif selected_time_period == 'Letzte Woche':
+    filtered_data = new_feeling_data.tail(35)  # Filtert die letzten 30 Einträge
 elif selected_time_period == 'Letzter Monat':
-    filtered_data = new_feeling_data.tail(30)  # Filtert die letzten 30 Einträge
-elif selected_time_period == 'Letzte 3 Monate':
-    filtered_data = new_feeling_data.tail(90)  # Filtert die letzten 90 Einträge
+    filtered_data = new_feeling_data.tail(140)  # Filtert die letzten 90 Einträge
 else:
     filtered_data = new_feeling_data  # Kein Filter angewendet
 
