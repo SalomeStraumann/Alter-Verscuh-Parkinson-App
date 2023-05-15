@@ -225,7 +225,7 @@ new_feeling_data = new_feeling_data.set_index('Datum und Zeit')
 # Darstellung der Daten in einem Diagram
 
 # Liniendiagramm "Limitation durch die Symptome im Verlauf der Zeit" anzeigen
-st.line_chart(new_feeling_data['StÃ¤rke der Limitation'])
+st.line_chart(new_feeling_data['Stärke der Limitation'])
 
 
 
