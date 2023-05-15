@@ -216,17 +216,17 @@ selected_time_period = st.selectbox('Zeitspanne auswählen:', time_periods)
 
 # Filtere die Daten basierend auf der ausgewählten Zeitspanne
 if selected_time_period == 'Letzte Woche':
-    filtered_data = new_feeling_data.last('7D')
+    filtered_data = new_feeling_data.tail(7)  # Filtert die letzten 7 Einträge
 elif selected_time_period == 'Letzter Monat':
-    filtered_data = new_feeling_data.last('30D')
+    filtered_data = new_feeling_data.tail(30)  # Filtert die letzten 30 Einträge
 elif selected_time_period == 'Letzte 3 Monate':
-    filtered_data = new_feeling_data.last('3M')
+    filtered_data = new_feeling_data.tail(90)  # Filtert die letzten 90 Einträge
 else:
     filtered_data = new_feeling_data  # Kein Filter angewendet
 
-# Darstellung der Daten in einem Diagram
+# Darstellung der Daten in einem Diagramm
 # Liniendiagramm "Limitation durch die Symptome im Verlauf der Zeit" anzeigen
-st.line_chart(new_feeling_data['Stärke der Limitation'])
+st.line_chart(filtered_data['Stärke der Limitation'])
 
 
 
