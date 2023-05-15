@@ -54,82 +54,31 @@ st.warning("Bitte beantworte die Fragen in der Seitenleiste")
 
 
 
+# # Nutzerbild hochladen
+# uploaded_image = st.file_uploader("Lade dein Benutzerbild hoch", type=["jpg", "jpeg", "png"])
+# if uploaded_image is not None:
+#     image = Image.open(uploaded_image)
+#     st.image(image, width=400)
 
 
-
-import json
-import requests
-
-BIN_API_URL = 'https://api.jsonbin.io/v3/b'
-
-def load_key(api_key, bin_id, key, empty_value=[]):
-    """
-    Load key from bin
-    """
-    url = BIN_API_URL + '/' + bin_id + '/latest'
-    headers = {'X-Master-Key': api_key}
-    res = requests.get(url, headers=headers).json()
-    res = res['record']
-    if key in res:
-        return res[key]
-    else:
-        return empty_value
-
-
-def save_key(api_key, bin_id, key, data):
-    """
-    Save key to bin
-    """
-    url = BIN_API_URL + '/' + bin_id
-    headers = {'X-Master-Key': api_key, 'Content-Type': 'application/json'}
-    res = requests.get(url, headers=headers).json()
-    res = res['record']
-    if type(res) != dict:
-        res = {key: data}  # generate new dict
-    else:
-        res[key] = data
-    res = requests.put(url, headers=headers, json=res).json()
-    return res
-
-
-def save_image_to_jsonbin(api_key, bin_id, username, image_path):
-    # Bilddatei laden
-    with open(image_path, 'rb') as file:
-        image_data = file.read()
-
-    # Bild in Base64 konvertieren
-    import base64
-    image_base64 = base64.b64encode(image_data).decode('utf-8')
-
-    # JSON-Daten erstellen
-    json_data = {
-        'image': image_base64
-    }
-
-    # JSON-Daten in der JSON-Bin speichern
-    save_key(api_key, bin_id, f"user_{username}_image", json_data)
-
-# Nutzerbild hochladen
-uploaded_image = st.file_uploader("Lade dein Benutzerbild hoch", type=["jpg", "jpeg", "png"])
-if uploaded_image is not None:
-    image = Image.open(uploaded_image)
-    st.image(image, width=400)
-    
-    # Benutzerbild speichern
-    save_image_to_jsonbin(api_key_bil, bin_id_bil, username, uploaded_image)
-else:
-    # Benutzerbild abrufen, falls vorhanden
-    user_image_data = load_key(api_key_bil, bin_id_bil, f"user_{username}_image")
-    if user_image_data is not None and 'image' in user_image_data:
-        image_base64 = user_image_data['image']
-        image_data = base64.b64decode(image_base64)
-        image = Image.open(io.BytesIO(image_data))
-        st.image(image, width=400)
-
-        
-
-
-        
+#     submitbild = st.sidebar.button('Bild Speichern')
+#     if submitbild:
+#     # Benutzerbild speichern
+#     user_images = load_key(api_key_bil, bin_id_bil, username)
+#     record_bil = save_key(api_key_bil, bin_id_bil, username, user_images)
+#     if 'message' in record_bil:
+#         st.error(record_bil['message'])
+#         user_images = load_key(api_key_bil, bin_id_bil, username)
+#         record_bil = save_key(api_key_bil, bin_id_bil, username, user_images)
+#         if 'message' in record_bil:
+#             st.error(record_bil['message'])
+# else:
+#     # Benutzerbild abrufen, falls vorhanden
+#     user_images = load_key(api_key_bil, bin_id_bil, username)
+#     user_image = user_images.get(username)
+#     if user_image is not None:
+#         st.image(user_image, width=400)
+     
         
         
         
