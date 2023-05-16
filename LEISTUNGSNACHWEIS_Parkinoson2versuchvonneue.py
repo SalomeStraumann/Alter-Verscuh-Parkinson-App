@@ -16,8 +16,6 @@ api_key_med = jsonbin_secrets["api_key_med"]
 bin_id_med = jsonbin_secrets["bin_id_med"]
 api_key_sick = jsonbin_secrets["api_key_sick"]
 bin_id_sick = jsonbin_secrets["bin_id_sick"]
-api_key_bil = jsonbin_secrets["api_key_bil"]
-bin_id_bil = jsonbin_secrets["bin_id_bil"]
 
 # -------- user login --------
 with open('config.yaml') as file:
