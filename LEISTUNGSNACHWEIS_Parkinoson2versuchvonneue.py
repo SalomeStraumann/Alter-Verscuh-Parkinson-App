@@ -53,36 +53,6 @@ if show_logout_button:
     # Logout-Button am Ende des Codes platzieren
     authenticator.logout('Logout', 'main')
 
-
-# # Nutzerbild hochladen
-# uploaded_image = st.file_uploader("Lade dein Benutzerbild hoch", type=["jpg", "jpeg", "png"])
-# if uploaded_image is not None:
-#     image = Image.open(uploaded_image)
-#     st.image(image, width=400)
-
-
-#     submitbild = st.sidebar.button('Bild Speichern')
-#     if submitbild:
-#     # Benutzerbild speichern
-#     user_images = load_key(api_key_bil, bin_id_bil, username)
-#     record_bil = save_key(api_key_bil, bin_id_bil, username, user_images)
-#     if 'message' in record_bil:
-#         st.error(record_bil['message'])
-#         user_images = load_key(api_key_bil, bin_id_bil, username)
-#         record_bil = save_key(api_key_bil, bin_id_bil, username, user_images)
-#         if 'message' in record_bil:
-#             st.error(record_bil['message'])
-# else:
-#     # Benutzerbild abrufen, falls vorhanden
-#     user_images = load_key(api_key_bil, bin_id_bil, username)
-#     user_image = user_images.get(username)
-#     if user_image is not None:
-#         st.image(user_image, width=400)
-     
-        
-        
-        
-
 # Seitenleiste
 # Eingabefelder für Datum und Uhrzeit
 date = st.sidebar.date_input("Datum", datetime.date(2023, 5, 20))
@@ -92,32 +62,29 @@ datetime_obj = datetime.datetime.combine(date, time)
 # Formation des Datetime-Objekts zum String
 datetime_string = datetime_obj.strftime('%Y-%m-%d, %H:%M')
 # Untertitel Seitenleiste - Befinden
-st.sidebar.header(':blue[Befinden]')
-# Liste der verfÃ¼gbaren Symptome
+st.sidebar.header(':blue:[Befinden]')
+# Liste der verfügbaren Symptome
 symptoms = [
-    'Taubheitsgefühl in den Beinen', 
-    'Taubheitsgefühl in den Armen', 
-    'Kribbeln in den Beinen', 
+    'Taubheitsgefühl in den Beinen',
+    'Taubheitsgefühl in den Armen',
+    'Kribbeln in den Beinen',
     'Kribbeln in den Armen',
     'Tremor (Zittern)',
     'Steifheit der Muskeln',
-    'Langsame Bewegungen'
-    'Rasche ErschÃ¶pfung', 
-    'Probleme bei der Darmentleerung', 
-    'Probleme bei der Blasenentleerung', 
-    'GangstÃ¶rungen', 
-    'GleichgewichtsstÃ¶rungen', 
-    'SehstÃ¶rungen', 
-    'LÃ¤hmungserscheinungen', 
+    'Langsame Bewegungen',
+    'Rasche Erschöpfung',
+    'Probleme bei der Darmentleerung',
+    'Probleme bei der Blasenentleerung',
+    'Gangstörungen',
+    'Gleichgewichtsstörungen',
+    'Sehstörungen',
+    'Lähmungserscheinungen',
     'Globale Schmerzen',
     'Keine Symptome'
 ]
-# Multiselect-Widget fÃ¼r die verfÃ¼gbaren Symptome
-selected_symptoms = st.sidebar.multiselect(
-    'Symptome', 
-    symptoms
-    )
-# Eingabefelder fÃ¼r die Schweregrade der ausgewÃ¤hlten Symptome
+# Multiselect-Widget für die verfügbaren Symptome
+selected_symptoms = st.sidebar.multiselect('Symptome', symptoms)
+# Eingabefelder für die Schweregrade der ausgewählten Symptome
 severity_levels = {}
 for symptom in selected_symptoms:
     severity_level = st.sidebar.number_input(
@@ -128,16 +95,17 @@ for symptom in selected_symptoms:
     )
     severity_levels[symptom] = severity_level
 # Einschub auf der Hauptseite
-# Anzeige der ausgewÃ¤hlten Symptome und Schweregrade auf der Hauptseite, falls Eingabefeld ausgefÃ¼llt
+# Anzeige der ausgewählten Symptome und Schweregrade auf der Hauptseite, falls Eingabefeld ausgefüllt
 if selected_symptoms:
-    st.write(':blue[AusgewÃ¤hlte Symptome und Schweregrade:]')
+    st.write(':blue[Ausgewählte Symptome und Schweregrade:]')
     for symptom in selected_symptoms:
         severity_level = severity_levels[symptom]
         st.write(f'- {symptom}: {severity_level}')
-# Speichern der ausgewÃ¤hlten Symptome und Schweregrade in einem Dictionary
-    symptoms_and_severity = {symptom: severity_levels[symptom] for symptom in selected_symptoms}
+# Speichern der ausgewählten Symptome und Schweregrade in einem Dictionary
+symptoms_and_severity = dict(zip(selected_symptoms, [severity_levels[symptom] for symptom in selected_symptoms]))
 else:
     st.write('Keine Symptome ausgewählt')
+
 # Seitenleiste
 # Slider fÃ¼r StÃ¤rke der Limitation in der Gesamtheit
 feeling = st.sidebar.slider('Wie stark limitieren dich die Symptome gerade im Alltag?', 0, 10, 1)
