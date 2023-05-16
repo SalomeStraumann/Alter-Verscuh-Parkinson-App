@@ -101,14 +101,18 @@ for symptom in selected_symptoms:
 # Einschub auf der Hauptseite
 # Anzeige der ausgewählten Symptome und Schweregrade auf der Hauptseite, falls Eingabefeld ausgefüllt
 if selected_symptoms:
-    st.write(':blue[Ausgewählte Symptome und Schweregrade:]')
+    st.write(':blue:[Ausgewählte Symptome und Schweregrade]')
     for symptom in selected_symptoms:
         severity_level = severity_levels[symptom]
         st.write(f'- {symptom}: {severity_level}')
 # Speichern der ausgewählten Symptome und Schweregrade in einem Dictionary
-    symptoms_and_severity = dict(zip(selected_symptoms, [severity_levels[symptom] for symptom in selected_symptoms]))
+symptoms_and_severity = dict((symptom, severity_levels[symptom]) for symptom in selected_symptoms)
 else:
     st.write('Keine Symptome ausgewählt')
+
+
+
+
 
     
     
