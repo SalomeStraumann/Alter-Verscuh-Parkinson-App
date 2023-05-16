@@ -61,6 +61,10 @@ time = st.sidebar.time_input("Uhrzeit", datetime.time(12, 00))
 datetime_obj = datetime.datetime.combine(date, time)
 # Formation des Datetime-Objekts zum String
 datetime_string = datetime_obj.strftime('%Y-%m-%d, %H:%M')
+
+
+
+
 # Untertitel Seitenleiste - Befinden
 st.sidebar.header(':blue:[Befinden]')
 # Liste der verfügbaren Symptome
@@ -101,11 +105,15 @@ if selected_symptoms:
     for symptom in selected_symptoms:
         severity_level = severity_levels[symptom]
         st.write(f'- {symptom}: {severity_level}')
-        # Speichern der ausgewählten Symptome und Schweregrade in einem Dictionary
+# Speichern der ausgewählten Symptome und Schweregrade in einem Dictionary
     symptoms_and_severity = dict(zip(selected_symptoms, [severity_levels[symptom] for symptom in selected_symptoms]))
 else:
     st.write('Keine Symptome ausgewählt')
 
+    
+    
+    
+    
 # Seitenleiste
 # Slider fÃ¼r StÃ¤rke der Limitation in der Gesamtheit
 feeling = st.sidebar.slider('Wie stark limitieren dich die Symptome gerade im Alltag?', 0, 10, 1)
