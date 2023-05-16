@@ -101,8 +101,8 @@ if selected_symptoms:
     for symptom in selected_symptoms:
         severity_level = severity_levels[symptom]
         st.write(f'- {symptom}: {severity_level}')
-# Speichern der ausgewählten Symptome und Schweregrade in einem Dictionary
-symptoms_and_severity = dict(zip(selected_symptoms, [severity_levels[symptom] for symptom in selected_symptoms]))
+        # Speichern der ausgewählten Symptome und Schweregrade in einem Dictionary
+    symptoms_and_severity = dict(zip(selected_symptoms, [severity_levels[symptom] for symptom in selected_symptoms]))
 else:
     st.write('Keine Symptome ausgewählt')
 
