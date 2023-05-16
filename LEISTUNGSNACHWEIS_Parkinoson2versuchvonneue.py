@@ -29,7 +29,6 @@ authenticator = stauth.Authenticate(
     config['cookie']['key'],
     config['cookie']['expiry_days'],
 )
-
 fullname, authentication_status, username = authenticator.login('Login', 'main')
 
 if authentication_status == True:   # login successful
@@ -51,6 +50,9 @@ text_after = "!"
 st.header("{} {}{}".format(text_before, username, text_after))
 # Information für den Nutzer
 st.warning("Bitte beantworte die Fragen in der Seitenleiste")
+
+# Logout-Button am Ende des Codes platzieren
+authenticator.logout('Logout', 'main')
 
 
 
