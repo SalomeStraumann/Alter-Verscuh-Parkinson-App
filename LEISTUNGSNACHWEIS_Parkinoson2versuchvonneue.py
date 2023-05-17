@@ -173,7 +173,7 @@ severity_level = {"Kribbeln in den Armen": 7, "Kribbeln in den Beinen": 4}
 
 # Ausgabe der Symptome und Schweregrade ohne geschweifte Klammern und Anführungszeichen
 versuch = for symptom, level in severity_level.items():
-      st.write(f"- {symptom}: {level}")
+              st.write(f"- {symptom}: {level}")
     
     
 
