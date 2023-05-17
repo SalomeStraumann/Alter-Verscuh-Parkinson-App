@@ -165,24 +165,6 @@ submit = st.sidebar.button('Speichern')
 delete = st.sidebar.button("Lezter Eintrag löschen")
 
 
-
-
-
-
-# Erstellung einer Liste von formatierten Strings ohne geschweifte Klammern und Anführungszeichen
-severity_list = [f"- {symptom}: {level}" for symptom, level in severity_level.items()]
-
-# Ausgabe der Liste
-for item in severity_list:
-    st.write(item)
-  
-    
-
-
-
-
-
-
 # Darstellung der Daten auf der Hauptseite - Daten aus dem Abschnitt "Befinden" und "Medikamente"
 
 # Funktion, um Daten der Tabelle "Krankheitsverlauf" hizuzufÃ¼gen
@@ -192,7 +174,7 @@ if submit:
     new_feeling = {
         "Datum und Zeit" : datetime_string,
         "Stärke der Limitation": feeling,
-        "Symptome und Schweregrade" : item,
+        "Symptome und Schweregrade" : severity_level,
         "Medikament und Dosierung" : add_medication,
         "Kommentare" :comment
     }
@@ -205,10 +187,6 @@ if submit:
 else:
     st.sidebar.write('Deine Daten wurden noch nicht gespeichert.')
  
- 
-
-    
-    
     
     
  
