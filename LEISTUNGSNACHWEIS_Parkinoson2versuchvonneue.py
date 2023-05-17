@@ -168,8 +168,6 @@ delete = st.sidebar.button("Lezter Eintrag löschen")
 
 
 
-    
-severity_level = {"Kribbeln in den Armen": 7, "Kribbeln in den Beinen": 4}
 
 # Erstellung einer Liste von formatierten Strings ohne geschweifte Klammern und Anführungszeichen
 severity_list = [f"- {symptom}: {level}" for symptom, level in severity_level.items()]
