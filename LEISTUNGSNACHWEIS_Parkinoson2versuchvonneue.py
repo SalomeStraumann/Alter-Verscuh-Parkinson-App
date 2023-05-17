@@ -165,6 +165,23 @@ submit = st.sidebar.button('Speichern')
 delete = st.sidebar.button("Lezter Eintrag löschen")
 
 
+
+
+
+    
+severity_level = {"Kribbeln in den Armen": 7, "Kribbeln in den Beinen": 4}
+
+# Ausgabe der Symptome und Schweregrade ohne geschweifte Klammern und Anführungszeichen
+versuch = for symptom, level in severity_level.items():
+      st.write(f"- {symptom}: {level}")
+    
+    
+
+
+
+
+
+
 # Darstellung der Daten auf der Hauptseite - Daten aus dem Abschnitt "Befinden" und "Medikamente"
 
 # Funktion, um Daten der Tabelle "Krankheitsverlauf" hizuzufÃ¼gen
@@ -174,7 +191,7 @@ if submit:
     new_feeling = {
         "Datum und Zeit" : datetime_string,
         "Stärke der Limitation": feeling,
-        "Symptome und Schweregrade" : symptoms_and_severity,
+        "Symptome und Schweregrade" : versuch,
         "Medikament und Dosierung" : add_medication,
         "Kommentare" :comment
     }
@@ -187,6 +204,11 @@ if submit:
 else:
     st.sidebar.write('Deine Daten wurden noch nicht gespeichert.')
  
+ 
+
+    
+    
+    
     
  
 # Löschen des letzten Eintrags
