@@ -171,10 +171,13 @@ delete = st.sidebar.button("Lezter Eintrag löschen")
     
 severity_level = {"Kribbeln in den Armen": 7, "Kribbeln in den Beinen": 4}
 
-# Ausgabe der Symptome und Schweregrade ohne geschweifte Klammern und Anführungszeichen
-versuch = for symptom, level in severity_level.items():
-              st.write(f"- {symptom}: {level}")
-    
+# Erstellung einer Liste von formatierten Strings ohne geschweifte Klammern und Anführungszeichen
+severity_list = [f"- {symptom}: {level}" for symptom, level in severity_level.items()]
+
+# Ausgabe der Liste
+for item in severity_list:
+    st.write(item)
+  
     
 
 
@@ -191,7 +194,7 @@ if submit:
     new_feeling = {
         "Datum und Zeit" : datetime_string,
         "Stärke der Limitation": feeling,
-        "Symptome und Schweregrade" : versuch,
+        "Symptome und Schweregrade" : item,
         "Medikament und Dosierung" : add_medication,
         "Kommentare" :comment
     }
