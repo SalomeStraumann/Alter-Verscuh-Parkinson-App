@@ -39,6 +39,11 @@ elif authentication_status == None:
     st.stop()
 
 # Hauptseite
+severity_level = {"Kribbeln in den Armen": 7, "Kribbeln in den Beinen": 4}
+
+# Ausgabe der Symptome und Schweregrade ohne geschweifte Klammern und Anführungszeichen
+for symptom, level in severity_level.items():
+    st.write(f"- {symptom}: {level}")
 
 # Titel der App
 st.title("Parkinson Tracker")
@@ -66,7 +71,7 @@ datetime_string = datetime_obj.strftime('%Y-%m-%d, %H:%M')
 
 
 # Untertitel Seitenleiste - Befinden
-st.sidebar.header(':blue:[Befinden]')
+st.sidebar.header(':blue[Befinden]')
 # Liste der verfügbaren Symptome
 symptoms = [
     'Taubheitsgefühl in den Beinen',
@@ -101,7 +106,7 @@ for symptom in selected_symptoms:
 # Einschub auf der Hauptseite
 # Anzeige der ausgewählten Symptome und Schweregrade auf der Hauptseite, falls Eingabefeld ausgefüllt
 if selected_symptoms:
-    st.write(':blue:[Ausgewählte Symptome und Schweregrade]')
+    st.write(':blue[Ausgewählte Symptome und Schweregrade]')
     for symptom in selected_symptoms:
         severity_level = severity_levels[symptom]
         st.write(f'- {symptom}: {severity_level}')
