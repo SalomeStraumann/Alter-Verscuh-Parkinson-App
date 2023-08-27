@@ -61,7 +61,10 @@ tab1, tab2, tab3, tab4 = st.tabs(["ToDo", "Butge","Sport", "Tagesplan"])
 
 with tab1:
    st.header("ToDo")
-import streamlit as st
+
+
+
+ import streamlit as st
 
 def main():
     st.title("Aufgabenliste")
@@ -108,6 +111,13 @@ def main():
 
 if __name__ == "__main__":
     main()
+   
+
+
+
+
+
+
 
 
 with tab2:
