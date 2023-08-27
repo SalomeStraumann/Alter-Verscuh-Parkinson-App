@@ -65,45 +65,23 @@ with tab1:
 
 
 
-
-
 def main():
     st.title("Aufgabenliste")
 
     tasks = st.session_state.tasks if "tasks" in st.session_state else []
 
     new_task = st.text_input("Neue Aufgabe hinzufügen:")
-    priority = st.selectbox("Priorität auswählen:", [1, 2, 3, 4, 5])
-
     if st.button("Hinzufügen"):
         if new_task:
-            task = {"task": new_task, "done": False, "priority": priority}
-            tasks.append(task)
+            tasks.append({"task": new_task, "done": False})
             st.session_state.tasks = tasks
             new_task = ""
-
-    tasks.sort(key=lambda x: (x["priority"], not x["done"]))
 
     st.write("Aktuelle Aufgaben:")
     for i, task in enumerate(tasks):
         task_text = task["task"]
         task_done = task["done"]
-        task_priority = task["priority"]
-
-        if task_priority == 1:
-            task_style = "color: red; font-weight: bold;"
-        elif task_priority == 2:
-            task_style = "color: orange; font-weight: bold;"
-        else:
-            task_style = ""
-
-        task_checkbox = st.checkbox(
-            label=task_text,
-            value=task_done,
-            key=i,
-            help=task_priority,
-            style=task_style
-        )
+        task_checkbox = st.checkbox(label=task_text, value=task_done, key=i)
         tasks[i]["done"] = task_checkbox
 
     # Entferne erledigte Aufgaben
@@ -112,10 +90,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-   
-
-
-
 
 
 
