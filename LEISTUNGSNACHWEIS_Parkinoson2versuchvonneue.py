@@ -42,13 +42,80 @@ elif authentication_status == None:
     st.stop()
 
 # Hauptseite der App
-st.title("Parkinson Tracker")
+st.title("...")
 # Begrüßungsnachricht
 text_before = "Hallo,"
 text_after = "!"
 st.header("{} {}{}".format(text_before, username, text_after))
-# Hinweis für den Benutzer
-st.warning("Bitte beantworte die Fragen in der Seitenleiste.")
+
+
+
+
+# Anpassung der Darstellung auf der Hauptseite
+
+# Überschrift
+st. header(":blue[Deine Daten auf einen Blick]")
+
+# Darstellung der Daten auf der Hauptseite in vier Tabs
+tab1, tab2, tab3, tab4 = st.tabs(["ToDo", "Butge","Sport", "Tagesplan"])
+
+with tab1:
+   st.header("ToDo")
+   st.write(new_feeling_data)
+   import streamlit as st
+
+def main():
+    st.title("Aufgabenliste")
+
+    tasks = st.session_state.tasks if "tasks" in st.session_state else []
+
+    new_task = st.text_input("Neue Aufgabe hinzufügen:")
+    if st.button("Hinzufügen"):
+        if new_task:
+            tasks.append({"task": new_task, "done": False})
+            st.session_state.tasks = tasks
+            new_task = ""
+
+    st.write("Aktuelle Aufgaben:")
+    for i, task in enumerate(tasks):
+        task_text = task["task"]
+        task_done = task["done"]
+        task_checkbox = st.checkbox(label=task_text, value=task_done, key=i)
+        tasks[i]["done"] = task_checkbox
+
+    # Entferne erledigte Aufgaben
+    tasks = [task for task in tasks if not task["done"]]
+    st.session_state.tasks = tasks
+
+if __name__ == "__main__":
+    main()
+
+with tab2:
+   st.header("Butge")
+   st.write(new_feeling_data)
+    
+with tab3:
+   st.header("Sport")
+   st.write(new_feeling_data)
+
+with tab4:
+    st.header("Tagesplan")
+    st.write(medi_list_data)
+    #if not medi_list:
+        #st.warning('Du hast noch keine Medikamente eingetragen.')
+    #else:
+        #st.write(medi_list_data)
+
+if show_logout_button:
+    # Logout-Button am Ende der Seite platzieren
+    authenticator.logout('Logout', 'main')
+
+
+
+
+
+
+
 
 # Seitenleiste
 # Eingabefelder für Datum und Uhrzeit
@@ -258,28 +325,3 @@ st.line_chart(filtered_data['Stärke der Limitation'])
 medi_list = load_key(api_key_med, bin_id_med, username)
 medi_list_data = pd.DataFrame(medi_list)
 
-
-# Anpassung der Darstellung auf der Hauptseite
-
-# Überschrift
-st. header(":blue[Deine Daten auf einen Blick]")
-
-# Darstellung der Daten auf der Hauptseite in zwei Tabs
-tab1, tab2 = st.tabs(["Krankheitsverlauf", "Medikamente"])
-
-with tab1:
-   st.header("Krankheitsverlauf")
-   st.write(new_feeling_data)
-
-
-
-with tab2:
-    st.header("Medikamente")
-    if not medi_list:
-        st.warning('Du hast noch keine Medikamente eingetragen.')
-    else:
-        st.write(medi_list_data)
-
-if show_logout_button:
-    # Logout-Button am Ende der Seite platzieren
-    authenticator.logout('Logout', 'main')
