@@ -61,7 +61,7 @@ tab1, tab2, tab3, tab4 = st.tabs(["ToDo", "Butge","Sport", "Tagesplan"])
 
 with tab1:
    st.header("ToDo")
-
+   st.write(new_feeling_data)
 
 import streamlit as st
 
@@ -97,6 +97,72 @@ if __name__ == "__main__":
 with tab2:
    st.header("Butge")
    st.write(new_feeling_data)
+
+   import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def main():
+    st.title("Finanzorganisator")
+
+    transactions = st.session_state.transactions if "transactions" in st.session_state else []
+
+    st.sidebar.header("Aktionen")
+    action = st.sidebar.radio("Wähle eine Aktion:", ["Einnahme hinzufügen", "Ausgabe hinzufügen", "Übersicht"])
+
+    if action == "Einnahme hinzufügen":
+        add_transaction(transactions, "Einnahme")
+
+    elif action == "Ausgabe hinzufügen":
+        add_transaction(transactions, "Ausgabe")
+
+    else:
+        show_overview(transactions)
+
+def add_transaction(transactions, transaction_type):
+    st.header(f"{transaction_type} hinzufügen")
+    amount = st.number_input(f"{transaction_type} Betrag:", step=0.01)
+    category = st.text_input("Kategorie:", "Allgemein")
+    date = st.date_input("Datum:")
+    description = st.text_area("Beschreibung:", "")
+    if st.button("Hinzufügen"):
+        transactions.append({
+            "Typ": transaction_type,
+            "Betrag": amount,
+            "Kategorie": category,
+            "Datum": date,
+            "Beschreibung": description
+        })
+        st.success(f"{transaction_type} wurde hinzugefügt!")
+
+    st.write("Letzte Transaktionen:")
+    df = pd.DataFrame(transactions)
+    st.dataframe(df)
+
+def show_overview(transactions):
+    st.header("Finanzübersicht")
+
+    df = pd.DataFrame(transactions)
+
+    income_total = df[df["Typ"] == "Einnahme"]["Betrag"].sum()
+    expense_total = df[df["Typ"] == "Ausgabe"]["Betrag"].sum()
+
+    st.write(f"Gesamte Einnahmen: {income_total:.2f}")
+    st.write(f"Gesamte Ausgaben: {expense_total:.2f}")
+    st.write(f"Kontostand: {income_total - expense_total:.2f}")
+
+    st.write("Ausgaben nach Kategorien:")
+    expense_by_category = df[df["Typ"] == "Ausgabe"].groupby("Kategorie")["Betrag"].sum()
+    st.bar_chart(expense_by_category)
+
+    st.write("Letzte Transaktionen:")
+    st.dataframe(df)
+
+if __name__ == "__main__":
+    main()
+
+
+
     
 with tab3:
    st.header("Sport")
@@ -104,11 +170,11 @@ with tab3:
 
 with tab4:
     st.header("Tagesplan")
-    st.write(medi_list_data)
-    #if not medi_list:
-        #st.warning('Du hast noch keine Medikamente eingetragen.')
-    #else:
-        #st.write(medi_list_data)
+    st.write(new_feeling_data)
+
+
+
+
 
 if show_logout_button:
     # Logout-Button am Ende der Seite platzieren
@@ -117,14 +183,9 @@ if show_logout_button:
 
 
 
-
-
-
-
-# Seitenleiste
 # Eingabefelder für Datum und Uhrzeit
 date = st.sidebar.date_input("Datum", datetime.date(2023, 6, 10))
-time = st.sidebar.time_input("Uhrzeit", datetime.time(12, 00))
+
 # Kombination von Datum und Uhrzeit zu einem DateTime-Objekt
 datetime_obj = datetime.datetime.combine(date, time)
 # Formatierung des DateTime-Objekts als String
@@ -223,7 +284,7 @@ if submit:
     st.balloons()   
     new_feeling = {
         "Datum und Zeit" : datetime_string,
-        "Stärke der Limitation": feeling,
+        "Aufgaben": tasks,
         "Symptome und Schweregrade" : symptoms_and_severity,
         "Kommentare" :comment
     }
