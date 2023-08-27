@@ -8,6 +8,7 @@ from jsonbin import load_key, save_key
 import yaml
 from yaml.loader import SafeLoader
 import streamlit_authenticator as stauth
+import matplotlib.pyplot as plt
 
 # Laden der Secrets für jsonbin.io
 jsonbin_secrets = st.secrets["jsonbin"]
@@ -61,9 +62,9 @@ tab1, tab2, tab3, tab4 = st.tabs(["ToDo", "Butge","Sport", "Tagesplan"])
 
 with tab1:
    st.header("ToDo")
-   st.write(new_feeling_data)
+   
 
-import streamlit as st
+
 
 def main():
     st.title("Aufgabenliste")
@@ -96,11 +97,10 @@ if __name__ == "__main__":
 
 with tab2:
    st.header("Butge")
-   st.write(new_feeling_data)
 
-   import streamlit as st
-import pandas as pd
-import matplotlib.pyplot as plt
+
+
+
 
 def main():
     st.title("Finanzorganisator")
