@@ -61,8 +61,7 @@ tab1, tab2, tab3, tab4 = st.tabs(["ToDo", "Butge","Sport", "Tagesplan"])
 
 with tab1:
    st.header("ToDo")
-   st.write(new_feeling_data)
-   import streamlit as st
+   #st.write(new_feeling_data)
 
 def main():
     st.title("Aufgabenliste")
