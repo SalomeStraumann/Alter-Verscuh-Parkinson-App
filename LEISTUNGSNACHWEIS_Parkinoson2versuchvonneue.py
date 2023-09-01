@@ -57,39 +57,55 @@ with ToDo:
     ['Studim'], ['Freizeit'], ['Zahlen'], ['Organisieren'],
     ['Richti'], ['Stäfa'], ['Wichtig'], ['Idee'])
 
-    st.write('You selected:', todo)
 
-    # Eingabefelder für Datum und Uhrzeit
-    date = st.sidebar.date_input("Datum", datetime.date(2023, 6, 10))
-    time = st.sidebar.time_input("Uhrzeit", datetime.time(12, 00))
-    # Kombination von Datum und Uhrzeit zu einem DateTime-Objekt
-    datetime_obj = datetime.datetime.combine(date, time)
-    # Formatierung des DateTime-Objekts als String
-    datetime_string = datetime_obj.strftime('%Y-%m-%d, %H:%M')
 
-# Untertitel Seitenleiste - Befinden
-st.sidebar.header(':blue[Befinden]')
-# Liste der verfügbaren Symptome
-symptoms = [
-    'Taubheitsgefühl in den Beinen',
-    'Taubheitsgefühl in den Armen',
-    'Kribbeln in den Beinen',
-    'Kribbeln in den Armen',
-    'Tremor (Zittern)',
-    'Steifheit der Muskeln',
-    'Langsame Bewegungen',
-    'Rasche Erschöpfung',
-    'Probleme bei der Darmentleerung',
-    'Probleme bei der Blasenentleerung',
-    'Gangstörungen',
-    'Gleichgewichtsstörungen',
-    'Sehstörungen',
-    'Lähmungserscheinungen',
-    'Globale Schmerzen',
-    'Keine Symptome'
-]
+    # Liste der verfügbaren Kategorien
+    todo = [
+    'Studim',
+    'Freizeit',
+    'Zahlen',
+    'Organisieren',
+    'Richti',
+    'Stäfa',
+    'Wichtig',
+    'Idee'
+    ]
 
-selected_symptoms = st.sidebar.multiselect('Wähle deine aktuellen Symptome aus.', symptoms)
+    selected_todos = st.multiselect('Wähle deine aktuelle Kategorie aus.', todo)
+
+
+    
+    # Untertitel Seitenleiste - Befinden
+    st.header(':blue[todo]')
+
+
+
+# Slider für Stärke der Limitation in der Gesamtheit
+feeling = st.sidebar.slider('Wie stark limitieren dich die Symptome gerade im Alltag?', 0, 10, 1)
+# Dictionary, das jedem Schweregrad eine Beschreibung zuordnet
+
+
+kat_farben = {
+    Studim: (':blue[todo]'),
+    Freizeit: (':blue[todo]'),
+    Zahlen: (':blue[todo]'),
+    Organisieren : (':blue[todo]'),
+    Richti : (':blue[todo]'),
+    Idee : (':blue[todo]'),
+    Wichtig : (':blue[todo]'),
+    Stäfa: (':blue[todo]')
+}
+# Beschreibungen der Schweregrade werden unter dem Slider angezeigt
+st.sidebar.write(severity_levels_lim[feeling])
+# Untertitel Seitenleiste - Kommentare
+st.sidebar.header(':blue[Kommentare]')
+# Eingabefeld, um Kommentare hinzuzufügen
+comment = st.sidebar.text_input('Hast du noch weitere relevante Bemerkungen?')
+
+
+
+
+
 
 severity_levels = {}
 for symptom in selected_symptoms:
