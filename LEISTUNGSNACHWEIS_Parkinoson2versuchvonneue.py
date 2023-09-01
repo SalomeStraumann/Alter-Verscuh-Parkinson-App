@@ -11,10 +11,10 @@ import streamlit_authenticator as stauth
 
 # Laden der Secrets für jsonbin.io
 jsonbin_secrets = st.secrets["jsonbin"]
-api_key_med = jsonbin_secrets["api_key_med"]
-bin_id_med = jsonbin_secrets["bin_id_med"]
-api_key_sick = jsonbin_secrets["api_key_sick"]
-bin_id_sick = jsonbin_secrets["bin_id_sick"]
+api_key_budge = jsonbin_secrets["api_key_budge"]
+bin_id_budge = jsonbin_secrets["bin_id_budge"]
+api_key_todo = jsonbin_secrets["api_key_todo"]
+bin_id_todo = jsonbin_secrets["bin_id_todo"]
 
 # Benutzerlogin
 with open('config.yaml') as file:
@@ -42,22 +42,30 @@ elif authentication_status == None:
     st.stop()
 
 # Hauptseite der App
-st.title("Parkinson Tracker")
+st.title("App")
 # Begrüßungsnachricht
 text_before = "Hallo,"
 text_after = "!"
 st.header("{} {}{}".format(text_before, username, text_after))
-# Hinweis für den Benutzer
-st.warning("Bitte beantworte die Fragen in der Seitenleiste.")
 
-# Seitenleiste
-# Eingabefelder für Datum und Uhrzeit
-date = st.sidebar.date_input("Datum", datetime.date(2023, 6, 10))
-time = st.sidebar.time_input("Uhrzeit", datetime.time(12, 00))
-# Kombination von Datum und Uhrzeit zu einem DateTime-Objekt
-datetime_obj = datetime.datetime.combine(date, time)
-# Formatierung des DateTime-Objekts als String
-datetime_string = datetime_obj.strftime('%Y-%m-%d, %H:%M')
+with ToDo:
+
+    
+
+    todo = st.multiselect(
+    'Kategorie',
+    ['Studim'], ['Freizeit'], ['Zahlen'], ['Organisieren'],
+    ['Richti'], ['Stäfa'], ['Wichtig'], ['Idee'])
+
+    st.write('You selected:', todo)
+
+    # Eingabefelder für Datum und Uhrzeit
+    date = st.sidebar.date_input("Datum", datetime.date(2023, 6, 10))
+    time = st.sidebar.time_input("Uhrzeit", datetime.time(12, 00))
+    # Kombination von Datum und Uhrzeit zu einem DateTime-Objekt
+    datetime_obj = datetime.datetime.combine(date, time)
+    # Formatierung des DateTime-Objekts als String
+    datetime_string = datetime_obj.strftime('%Y-%m-%d, %H:%M')
 
 # Untertitel Seitenleiste - Befinden
 st.sidebar.header(':blue[Befinden]')
