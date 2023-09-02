@@ -126,13 +126,15 @@ if __name__ == "__main__":
     Stäfa: (':blue[todo]')
     }
 
-    st.write(kat_farben
+    st.write(kat_farben)
+
+
 # Beschreibungen der Schweregrade werden unter dem Slider angezeigt
-st.sidebar.write(severity_levels_lim[feeling])
+st.write(severity_levels_lim[feeling])
 # Untertitel Seitenleiste - Kommentare
-st.sidebar.header(':blue[Kommentare]')
+st.header(':blue[Kommentare]')
 # Eingabefeld, um Kommentare hinzuzufügen
-comment = st.sidebar.text_input('Hast du noch weitere relevante Bemerkungen?')
+comment = st.text_input('Hast du noch weitere relevante Bemerkungen?')
 
 
 
