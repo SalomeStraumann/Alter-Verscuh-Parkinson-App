@@ -52,7 +52,7 @@ tab1, tab2, tab3 = st.tabs(["ToDo", "Budge", "Planen"])
 
 import streamlit as st
 
-def tab1():
+with  tab1():
     st.header("ToDo")
 
     tasks = st.session_state.tasks if "tasks" in st.session_state else []
