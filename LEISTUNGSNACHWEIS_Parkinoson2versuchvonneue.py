@@ -48,11 +48,10 @@ text_before = "Hallo,"
 text_after = "!"
 st.header("{} {}{}".format(text_before, username, text_after))
 
-tab1, tab2, tab3 = st.tabs(["ToDo", "Budge", "Planen"])
 
 
-def tab1:
-    st.title("Aufgabenliste")
+def tab1():
+    st.header("ToDo")
 
     tasks = st.session_state.tasks if "tasks" in st.session_state else []
 
@@ -74,8 +73,42 @@ def tab1:
     tasks = [task for task in tasks if not task["done"]]
     st.session_state.tasks = tasks
 
+def tab2():
+    st.header("Tab 2 Inhalt hier einfügen")
+    # Hier kannst du den Inhalt für den zweiten Tab definieren
+
+def main():
+    st.title("Tabbed Streamlit-Anwendung")
+
+    tabs = ["ToDo", "Tab 2"]  # Liste der Tab-Namen
+    selected_tab = st.radio("Wähle einen Tab:", tabs)
+
+    if selected_tab == "ToDo":
+        tab1()
+    elif selected_tab == "Tab 2":
+        tab2()
+
 if __name__ == "__main__":
     main()
+
+    todo = st.multiselect(
+        'Kategorie',
+        todo)
+
+
+    # Liste der verfügbaren Kategorien
+    todo = [
+    'Studim',
+    'Freizeit',
+    'Zahlen',
+    'Organisieren',
+    'Richti',
+    'Stäfa',
+    'Wichtig',
+    'Idee'
+    ]
+
+    selected_todos = st.multiselect('Wähle deine aktuelle Kategorie aus.', todo)
 
 
     
@@ -93,22 +126,18 @@ if __name__ == "__main__":
     Stäfa: (':blue[todo]')
     }
 
-    st.write(kat_farben)
+    st.write(kat_farben
 # Beschreibungen der Schweregrade werden unter dem Slider angezeigt
-st.write(severity_levels_lim[feeling])
+st.sidebar.write(severity_levels_lim[feeling])
 # Untertitel Seitenleiste - Kommentare
 st.sidebar.header(':blue[Kommentare]')
 # Eingabefeld, um Kommentare hinzuzufügen
 comment = st.sidebar.text_input('Hast du noch weitere relevante Bemerkungen?')
 
-with tab2:
-    st.header("Budge")
-    st.image("https://static.streamlit.io/examples/dog.jpg", width=200)
 
 
-with tab3:
-    st.header("Planen")
-    st.image("https://static.streamlit.io/examples/dog.jpg", width=200)
+
+
 
 severity_levels = {}
 for symptom in selected_symptoms:
