@@ -50,8 +50,9 @@ st.header("{} {}{}".format(text_before, username, text_after))
 
 tab1, tab2, tab3 = st.tabs(["ToDo", "Budge", "Planen"])
 
+import streamlit as st
 
-with tab1:
+def tab1():
     st.header("ToDo")
 
     tasks = st.session_state.tasks if "tasks" in st.session_state else []
@@ -111,7 +112,7 @@ def main():
         tab2()
 
 if __name__ == "__main__":
-    todoss = [
+    todo = [
         'Studium',
         'Freizeit',
         'Zahlen',
