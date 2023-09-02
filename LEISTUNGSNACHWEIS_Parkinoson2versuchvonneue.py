@@ -111,7 +111,7 @@ def main():
         tab2()
 
 if __name__ == "__main__":
-    todo = [
+    todoss = [
         'Studium',
         'Freizeit',
         'Zahlen',
