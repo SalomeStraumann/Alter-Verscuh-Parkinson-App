@@ -50,17 +50,16 @@ st.header("{} {}{}".format(text_before, username, text_after))
 
 tab1, tab2, tab3 = st.tabs(["ToDo", "Budge", "Planen"])
 
-with  tab1:
-    st.header("ToDo")
+
+def tab1:
+    st.title("Aufgabenliste")
 
     tasks = st.session_state.tasks if "tasks" in st.session_state else []
 
     new_task = st.text_input("Neue Aufgabe hinzufügen:")
-    task_category = st.selectbox("Kategorie auswählen:", todo)  # todo ist die Liste der Kategorien
-
     if st.button("Hinzufügen"):
         if new_task:
-            tasks.append({"task": new_task, "done": False, "category": task_category})
+            tasks.append({"task": new_task, "done": False})
             st.session_state.tasks = tasks
             new_task = ""
 
@@ -68,60 +67,16 @@ with  tab1:
     for i, task in enumerate(tasks):
         task_text = task["task"]
         task_done = task["done"]
-        task_category = task["category"]
-
-        task_color = get_category_color(task_category)  # Funktion, um Farben basierend auf der Kategorie zu erhalten
-
-        st.markdown(f'<p style="color:{task_color};">{task_text}</p>', unsafe_allow_html=True)
-        task_checkbox = st.checkbox(label=f"Erledigt ({task_category})", value=task_done, key=i)
+        task_checkbox = st.checkbox(label=task_text, value=task_done, key=i)
         tasks[i]["done"] = task_checkbox
 
     # Entferne erledigte Aufgaben
     tasks = [task for task in tasks if not task["done"]]
     st.session_state.tasks = tasks
 
-def get_category_color(category):
-    # Hier kannst du die Farben für verschiedene Kategorien festlegen
-    color_map = {
-        'Studium': 'red',
-        'Freizeit': 'green',
-        'Zahlen': 'blue',
-        'Organisieren': 'orange',
-        'Richti': 'purple',
-        'Stäfa': 'pink',
-        'Wichtig': 'brown',
-        'Idee': 'gray'
-    }
-    return color_map.get(category, 'black')  # Standardfarbe ist Schwarz
-
-def tab2():
-    st.header("Tab 2 Inhalt hier einfügen")
-    # Hier kannst du den Inhalt für den zweiten Tab definieren
-
-def main():
-    st.title("Tabbed Streamlit-Anwendung")
-
-    tabs = ["ToDo", "Tab 2"]  # Liste der Tab-Namen
-    selected_tab = st.radio("Wähle einen Tab:", tabs)
-
-    if selected_tab == "ToDo":
-        tab1()
-    elif selected_tab == "Tab 2":
-        tab2()
-
 if __name__ == "__main__":
-    todo = [
-        'Studium',
-        'Freizeit',
-        'Zahlen',
-        'Organisieren',
-        'Richti',
-        'Stäfa',
-        'Wichtig',
-        'Idee'
-    ]
-
     main()
+
 
     
     # Untertitel Seitenleiste - Befinden
