@@ -48,34 +48,48 @@ text_before = "Hallo,"
 text_after = "!"
 st.header("{} {}{}".format(text_before, username, text_after))
 
-with tab1:
-   st.header("ToDo")
-   def main():
-       st.title("Aufgabenliste")
 
-        tasks = st.session_state.tasks if "tasks" in st.session_state else []
 
-        new_task = st.text_input("Neue Aufgabe hinzufügen:")
-        if st.button("Hinzufügen"):
-            if new_task:
-                tasks.append({"task": new_task, "done": False})
-                st.session_state.tasks = tasks
-                new_task = ""
+def tab1():
+    st.header("ToDo")
 
-        st.write("Aktuelle Aufgaben:")
-        for i, task in enumerate(tasks):
-            task_text = task["task"]
-            task_done = task["done"]
-            task_checkbox = st.checkbox(label=task_text, value=task_done, key=i)
-            tasks[i]["done"] = task_checkbox
+    tasks = st.session_state.tasks if "tasks" in st.session_state else []
 
-        # Entferne erledigte Aufgaben
-        tasks = [task for task in tasks if not task["done"]]
-        st.session_state.tasks = tasks
+    new_task = st.text_input("Neue Aufgabe hinzufügen:")
+    if st.button("Hinzufügen"):
+        if new_task:
+            tasks.append({"task": new_task, "done": False})
+            st.session_state.tasks = tasks
+            new_task = ""
 
-    if __name__ == "__main__":
-        main()
+    st.write("Aktuelle Aufgaben:")
+    for i, task in enumerate(tasks):
+        task_text = task["task"]
+        task_done = task["done"]
+        task_checkbox = st.checkbox(label=task_text, value=task_done, key=i)
+        tasks[i]["done"] = task_checkbox
 
+    # Entferne erledigte Aufgaben
+    tasks = [task for task in tasks if not task["done"]]
+    st.session_state.tasks = tasks
+
+def tab2():
+    st.header("Tab 2 Inhalt hier einfügen")
+    # Hier kannst du den Inhalt für den zweiten Tab definieren
+
+def main():
+    st.title("Tabbed Streamlit-Anwendung")
+
+    tabs = ["ToDo", "Tab 2"]  # Liste der Tab-Namen
+    selected_tab = st.radio("Wähle einen Tab:", tabs)
+
+    if selected_tab == "ToDo":
+        tab1()
+    elif selected_tab == "Tab 2":
+        tab2()
+
+if __name__ == "__main__":
+    main()
 
     todo = st.multiselect(
         'Kategorie',
