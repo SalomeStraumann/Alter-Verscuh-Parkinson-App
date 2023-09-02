@@ -148,10 +148,12 @@ comment = st.sidebar.text_input('Hast du noch weitere relevante Bemerkungen?')
 
 with tab2:
     st.header("Budge")
+    st.image("https://static.streamlit.io/examples/dog.jpg", width=200)
+
 
 with tab3:
     st.header("Planen")
-
+    st.image("https://static.streamlit.io/examples/dog.jpg", width=200)
 
 severity_levels = {}
 for symptom in selected_symptoms:
