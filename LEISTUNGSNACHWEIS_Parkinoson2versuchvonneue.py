@@ -48,6 +48,7 @@ text_before = "Hallo,"
 text_after = "!"
 st.header("{} {}{}".format(text_before, username, text_after))
 
+tab1, tab2, tab3 = st.tabs(["ToDo", "Budge", "Planen"])
 
 
 with tab1:
@@ -146,9 +147,11 @@ st.sidebar.header(':blue[Kommentare]')
 # Eingabefeld, um Kommentare hinzuzufügen
 comment = st.sidebar.text_input('Hast du noch weitere relevante Bemerkungen?')
 
+with tab2:
+    st.header("Budge")
 
-
-
+with tab3:
+    st.header("Planen")
 
 
 severity_levels = {}
