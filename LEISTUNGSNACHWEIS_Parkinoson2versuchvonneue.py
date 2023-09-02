@@ -48,8 +48,8 @@ text_before = "Hallo,"
 text_after = "!"
 st.header("{} {}{}".format(text_before, username, text_after))
 
-with ToDo:
-
+with tab1:
+   st.header("ToDo")
     
 
     todo = st.multiselect(
@@ -78,23 +78,18 @@ with ToDo:
     # Untertitel Seitenleiste - Befinden
     st.header(':blue[todo]')
 
-
-
-# Slider für Stärke der Limitation in der Gesamtheit
-feeling = st.sidebar.slider('Wie stark limitieren dich die Symptome gerade im Alltag?', 0, 10, 1)
-# Dictionary, das jedem Schweregrad eine Beschreibung zuordnet
-
-
-kat_farben = {
+    kat_farben = {
     Studim: (':blue[todo]'),
-    Freizeit: (':blue[todo]'),
-    Zahlen: (':blue[todo]'),
-    Organisieren : (':blue[todo]'),
-    Richti : (':blue[todo]'),
+    Freizeit: (':green[todo]'),
+    Zahlen: (':gray[todo]'),
+    Organisieren : (':violet[todo]'),
+    Richti : (':pink[todo]'),
     Idee : (':blue[todo]'),
-    Wichtig : (':blue[todo]'),
+    Wichtig : (':red[todo]'),
     Stäfa: (':blue[todo]')
-}
+    }
+
+    st.write(kat_farben
 # Beschreibungen der Schweregrade werden unter dem Slider angezeigt
 st.sidebar.write(severity_levels_lim[feeling])
 # Untertitel Seitenleiste - Kommentare
