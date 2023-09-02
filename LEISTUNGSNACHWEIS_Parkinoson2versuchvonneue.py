@@ -54,8 +54,7 @@ with tab1:
 
     todo = st.multiselect(
         'Kategorie',
-        ['Studim'], ['Freizeit'], ['Zahlen'], ['Organisieren'],
-        ['Richti'], ['Stäfa'], ['Wichtig'], ['Idee'])
+        todo)
 
 
     # Liste der verfügbaren Kategorien
