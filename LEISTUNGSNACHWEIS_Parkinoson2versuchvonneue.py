@@ -51,8 +51,6 @@ st.header("{} {}{}".format(text_before, username, text_after))
 with tab1:
    st.header("ToDo")
 
-    import streamlit as st
-
     def main():
         st.title("Aufgabenliste")
 
