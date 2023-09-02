@@ -50,9 +50,8 @@ st.header("{} {}{}".format(text_before, username, text_after))
 
 with tab1:
    st.header("ToDo")
-
-    def main():
-        st.title("Aufgabenliste")
+   def main():
+       st.title("Aufgabenliste")
 
         tasks = st.session_state.tasks if "tasks" in st.session_state else []
 
