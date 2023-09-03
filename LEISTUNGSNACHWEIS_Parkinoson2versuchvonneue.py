@@ -78,12 +78,12 @@ def main():
     st.title("Aufgabenliste")
 
 tab1, tab2, tab3 = st.tabs(["ToDo", "Butge", "Planung"])
-    with tab1:
-        st.header("ToDo")
-        tasks = st.session_state.tasks if "tasks" in st.session_state else []
+with tab1:
+    st.header("ToDo")
+    tasks = st.session_state.tasks if "tasks" in st.session_state else []
 
-        new_task = st.text_input("Neue Aufgabe hinzufügen:")
-        todo = [
+    new_task = st.text_input("Neue Aufgabe hinzufügen:")
+    todo = [
             'Studium',
             'Freizeit',
             'Zahlen',
@@ -92,14 +92,14 @@ tab1, tab2, tab3 = st.tabs(["ToDo", "Butge", "Planung"])
             'Stäfa',
             'Wichtig',
             'Idee'
-        ]
-        task_category = st.selectbox("Kategorie auswählen:", todo)
+    ]
+    task_category = st.selectbox("Kategorie auswählen:", todo)
 
-        if st.button("Hinzufügen"):
-            if new_task:
-                tasks.append({"task": new_task, "done": False, "category": task_category})
-                st.session_state.tasks = tasks
-                new_task = ""
+    if st.button("Hinzufügen"):
+        if new_task:
+        tasks.append({"task": new_task, "done": False, "category": task_category})
+        st.session_state.tasks = tasks
+        new_task = ""
 
         st.write("Aktuelle Aufgaben:")
         for task in tasks:
