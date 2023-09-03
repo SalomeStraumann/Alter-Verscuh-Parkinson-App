@@ -97,9 +97,9 @@ with tab1:
 
     if st.button("Hinzufügen"):
         if new_task:
-        tasks.append({"task": new_task, "done": False, "category": task_category})
-        st.session_state.tasks = tasks
-        new_task = ""
+            tasks.append({"task": new_task, "done": False, "category": task_category})
+            st.session_state.tasks = tasks
+            new_task = ""
 
     st.write("Aktuelle Aufgaben:")
     for task in tasks:
