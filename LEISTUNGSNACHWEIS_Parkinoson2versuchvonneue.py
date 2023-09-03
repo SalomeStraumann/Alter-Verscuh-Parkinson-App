@@ -123,9 +123,6 @@ with tab2:
     tab1, tab2, tab3 = st.tabs(["September", "Oktober", "November"])
     with tab1:
 
-        # Eingabe des Kontostands zu Beginn des Monats
-        kontostand = st.number_input('Kontostand zu Beginn des Monats')
-
         # Auswahl der Kategorie
         kategorie = st.selectbox(
             'Was für eine Ausgabe war es?',
@@ -145,11 +142,11 @@ with tab2:
             start_betrag = 50
 
         # Anfangskontostand anzeigen
-        st.write(f'Anfangskontostand: {kontostand}')
+        st.write(f'Anfangskontostand: {start_betrag}')
 
         if st.button("Speichern", type="primary"):
             # Berechnung des verbleibenden Kontostands
-            verbleibender_betrag = kontostand - ausgaben
+            verbleibender_betrag = start_betrag - ausgaben
 
             # Ausgabe des verbleibenden Kontostands
             st.write(f'Kontostand nach {kategorie}: {verbleibender_betrag}')
