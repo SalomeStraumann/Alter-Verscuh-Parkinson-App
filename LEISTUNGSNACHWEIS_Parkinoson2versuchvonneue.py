@@ -150,7 +150,7 @@ with tab2:
   
     with tab2:   
 
-   
+       st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
         
     with tab3:
 
