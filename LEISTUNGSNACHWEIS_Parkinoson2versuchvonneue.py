@@ -57,6 +57,7 @@ st.header("{} {}{}".format(text_before, username, text_after))
 
 
 
+import streamlit as st
 
 # Die Funktion zum Holen der Farbe basierend auf der Kategorie
 def get_category_color(category):
@@ -76,7 +77,6 @@ def get_category_color(category):
 # Hauptfunktion zur Erstellung der Streamlit-Oberfläche
 def main():
     st.title("Aufgabenliste")
-
 
     tab1, tab2, tab3 = st.tabs(["ToDO", "Butge", "Planung"])
     with tab1:
@@ -103,15 +103,14 @@ def main():
                 new_task = ""
 
         st.write("Aktuelle Aufgaben:")
-        for i, task in enumerate(tasks):
+        for task in tasks:
             task_text = task["task"]
             task_done = task["done"]
 
             task_color = get_category_color(task["category"])
 
-            st.markdown(f'<p style="color:{task_color};">{task_text}</p>', unsafe_allow_html=True)
-            task_checkbox = st.checkbox(label=task_text, value=task_done, key=i)
-            tasks[i]["done"] = task_checkbox
+            task_checkbox = st.checkbox(label="", value=task_done, key=task_text)
+            st.markdown(f'<p style="color:{task_color};">{task_checkbox} {task_text}</p>', unsafe_allow_html=True)
 
         # Entferne erledigte Aufgaben
         tasks = [task for task in tasks if not task["done"]]
