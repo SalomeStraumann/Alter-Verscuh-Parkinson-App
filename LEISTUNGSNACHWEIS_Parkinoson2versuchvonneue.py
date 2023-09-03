@@ -77,7 +77,7 @@ def get_category_color(category):
 def main():
     st.title("Aufgabenliste")
 
-    tab1, tab2, tab3 = st.columns(3)
+tab1, tab2, tab3 = st.tabs(["ToDo", "Butge", "Planung"])
     with tab1:
         st.header("ToDo")
         tasks = st.session_state.tasks if "tasks" in st.session_state else []
