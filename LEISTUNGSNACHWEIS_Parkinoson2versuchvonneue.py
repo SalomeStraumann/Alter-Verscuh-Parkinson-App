@@ -117,36 +117,43 @@ with tab1:
     st.session_state.tasks = tasks
 
 with tab2:
-    st.header("Butge")
-    tab1, tab2, tab3 = st.tabs(["September", "Oktober", "November"])
-    with tab1:
+import streamlit as st
 
-        # Eingabe des Kontostands zu Beginn des Monats
-        kontostand = st.number_input('Kontostand zu Beginn des Monats')
+st.header("Budget")
+tab1, tab2, tab3 = st.tabs(["September", "Oktober", "November"])
+with tab1:
 
-        # Auswahl der Kategorie
-        kategorie = st.selectbox(
-            'Was für eine Ausgabe war es?',
-            ('Essen', 'Freizeit', 'Zug', 'Miete', 'Lohn'))
+    # Eingabe des Kontostands zu Beginn des Monats
+    kontostand = st.number_input('Kontostand zu Beginn des Monats')
 
-        # Eingabe des Ausgabebetrags
-        ausgaben = st.number_input('Ausgabe')
+    # Auswahl der Kategorie
+    kategorie = st.selectbox(
+        'Was für eine Ausgabe war es?',
+        ('Essen', 'Freizeit', 'Zug', 'Miete', 'Lohn'))
 
-        # Initialisierung der Startbeträge je nach Kategorie
-        start_betrag = 0
+    # Eingabe des Ausgabebetrags
+    ausgaben = st.number_input('Ausgabe')
 
-        if kategorie == 'Essen':
-            start_betrag = 150
-        elif kategorie == 'Freizeit':
-            start_betrag = 200
-        elif kategorie == 'Zug':
-            start_betrag = 50
+    # Initialisierung der Startbeträge je nach Kategorie
+    start_betrag = 0
 
+    if kategorie == 'Essen':
+        start_betrag = 150
+    elif kategorie == 'Freizeit':
+        start_betrag = 200
+    elif kategorie == 'Zug':
+        start_betrag = 50
+
+    # Anfangskontostand anzeigen
+    st.write(f'Anfangskontostand: {kontostand}')
+
+    if st.button("Speichern", type="primary"):
         # Berechnung des verbleibenden Kontostands
-        verbleibender_kontostand = kontostand - (start_betrag + ausgaben)
+        verbleibender_betrag = kontostand - ausgaben
 
         # Ausgabe des verbleibenden Kontostands
-        st.write(f'Kontostand nach {kategorie}: {verbleibender_kontostand}')
+        st.write(f'Kontostand nach {kategorie}: {verbleibender_betrag}')
+
   
     with tab2:   
 
