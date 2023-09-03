@@ -57,7 +57,6 @@ st.header("{} {}{}".format(text_before, username, text_after))
 
 
 
-import streamlit as st
 
 # Die Funktion zum Holen der Farbe basierend auf der Kategorie
 def get_category_color(category):
@@ -126,7 +125,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 
 
 
