@@ -123,6 +123,14 @@ if __name__ == "__main__":
     ]
 
     main()
+
+
+
+
+
+
+
+
 import streamlit as st
 
 # Funktion, um die Farbe basierend auf der Kategorie zu erhalten
@@ -185,16 +193,14 @@ def planung_tab():
 def main():
     st.title("Tabbed Streamlit-Anwendung")
 
-    # Liste der Tab-Namen
-    tabs = ["Aufgaben", "Budget", "Planung"]
-    selected_tab = st.radio("Wähle einen Tab:", tabs)
+    # Tabs aus dem Beispiel
+    tab1, tab2, tab3 = st.tabs(["Cat", "Dog", "Owl"])
 
-    # Anzeige des ausgewählten Tabs
-    if selected_tab == "Aufgaben":
+    if tab1:
         todo_tab()
-    elif selected_tab == "Budget":
+    elif tab2:
         budget_tab()
-    elif selected_tab == "Planung":
+    elif tab3:
         planung_tab()
 
 if __name__ == "__main__":
@@ -210,6 +216,8 @@ if __name__ == "__main__":
     ]
 
     main()
+
+
 
 
 
