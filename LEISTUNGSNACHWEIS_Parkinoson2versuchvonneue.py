@@ -118,8 +118,63 @@ with tab1:
 
 with tab2:
     st.header("Butge")
-    # Hier kannst du den Inhalt des zweiten Tabs hinzufügen
+    tab1, tab2, tab3 = st.tabs(["September", "Oktober", "November"])
+    with tab1:
+        Kontostand = st.number_input('Kontostand beginn zum Monat')
 
+        kathegorie = st.selectbox(
+        'Was für eine Ausgebe war es?',
+        ('Essen', 'Frizeit', 'Zug', 'Mite','Lohn'))
+
+        Ausgaben = st.number_input('Ausgabe')
+
+        if kathegorie == 'Essen':
+            st.write 150
+    with tab2:   
+
+        Kontostand = st.number_input('Kontostand beginn zum Monat')
+
+        kathegorie = st.selectbox(
+        'Was für eine Ausgebe war es?',
+        ('Essen', 'Frizeit', 'Zug', 'Mite','Lohn'))
+
+        Ausgaben = st.number_input('Ausgabe')
+
+        if kathegorie == 'Essen':
+            st.write 150        
+        
+    with tab3:
+
+
+        # Eingabe des Kontostands zu Beginn des Monats
+        kontostand = st.number_input('Kontostand zu Beginn des Monats')
+
+        # Auswahl der Kategorie
+        kategorie = st.selectbox(
+            'Was für eine Ausgabe war es?',
+            ('Essen', 'Freizeit', 'Zug', 'Miete', 'Lohn'))
+
+        # Eingabe des Ausgabebetrags
+        ausgaben = st.number_input('Ausgabe')
+
+        # Initialisierung der Startbeträge je nach Kategorie
+        start_betrag = 0
+
+        if kategorie == 'Essen':
+            start_betrag = 150
+        elif kategorie == 'Freizeit':
+            start_betrag = 200
+        elif kategorie == 'Zug':
+            start_betrag = 50
+
+        # Berechnung des verbleibenden Kontostands
+        verbleibender_kontostand = kontostand - (start_betrag + ausgaben)
+
+        # Ausgabe des verbleibenden Kontostands
+        st.write(f'Kontostand nach {kategorie}: {verbleibender_kontostand}')
+
+
+    
 with tab3:
     st.header("Planung")
     # Hier kannst du den Inhalt des dritten Tabs hinzufügen
