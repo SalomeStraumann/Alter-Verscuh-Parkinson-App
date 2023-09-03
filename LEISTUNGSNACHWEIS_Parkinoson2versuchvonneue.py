@@ -56,7 +56,7 @@ st.header("{} {}{}".format(text_before, username, text_after))
 
 
 
-import streamlit as st
+
 
 # Die Funktion zum Holen der Farbe basierend auf der Kategorie
 def get_category_color(category):
@@ -77,8 +77,8 @@ def get_category_color(category):
 def main():
     st.title("Aufgabenliste")
 
-    # Erstelle Tabs
-    tab1, tab2, tab3 = st.beta_columns(3)  # Stelle sicher, dass die Tabs nebeneinander angezeigt werden
+
+    tab1, tab2, tab3 = st.tabs(["ToDO", "Butge", "Planung"])
     with tab1:
         st.header("ToDo")
         tasks = st.session_state.tasks if "tasks" in st.session_state else []
