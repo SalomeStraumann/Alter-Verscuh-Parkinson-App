@@ -96,33 +96,33 @@ with tab1:
     task_category = st.selectbox("Kategorie auswählen:", todo)
 
     if st.button("Hinzufügen"):
-        if new_task:
-        tasks.append({"task": new_task, "done": False, "category": task_category})
-        st.session_state.tasks = tasks
-        new_task = ""
+    if new_task:
+    tasks.append({"task": new_task, "done": False, "category": task_category})
+    st.session_state.tasks = tasks
+    new_task = ""
 
-        st.write("Aktuelle Aufgaben:")
-        for task in tasks:
-            task_text = task["task"]
-            task_done = task["done"]
+    st.write("Aktuelle Aufgaben:")
+    for task in tasks:
+        task_text = task["task"]
+        task_done = task["done"]
 
-            task_color = get_category_color(task["category"])
+        task_color = get_category_color(task["category"])
 
-            if st.checkbox("", value=task_done, key=task_text):
-                tasks.remove(task)
-            else:
-                st.markdown(f'<p style="color:{task_color};">{task_text}</p>', unsafe_allow_html=True)
+        if st.checkbox("", value=task_done, key=task_text):
+            tasks.remove(task)
+        else:
+            st.markdown(f'<p style="color:{task_color};">{task_text}</p>', unsafe_allow_html=True)
 
-        # Entferne erledigte Aufgaben
-        st.session_state.tasks = tasks
+    # Entferne erledigte Aufgaben
+    st.session_state.tasks = tasks
 
-    with tab2:
-        st.header("Butge")
-        # Hier kannst du den Inhalt des zweiten Tabs hinzufügen
+with tab2:
+    st.header("Butge")
+    # Hier kannst du den Inhalt des zweiten Tabs hinzufügen
 
-    with tab3:
-        st.header("Planung")
-        # Hier kannst du den Inhalt des dritten Tabs hinzufügen
+with tab3:
+    st.header("Planung")
+    # Hier kannst du den Inhalt des dritten Tabs hinzufügen
 
 if __name__ == "__main__":
     main()
