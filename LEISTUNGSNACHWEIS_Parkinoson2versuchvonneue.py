@@ -56,17 +56,19 @@ st.header("{} {}{}".format(text_before, username, text_after))
 
 
 
+import streamlit as st
+
 # Die Funktion zum Holen der Farbe basierend auf der Kategorie
 def get_category_color(category):
     # Hier kannst du die Farben für verschiedene Kategorien festlegen
     color_map = {
-        'Studium': 'turquoise',
+        'Studium': 'red',
         'Freizeit': 'green',
         'Zahlen': 'blue',
         'Organisieren': 'orange',
         'Richti': 'purple',
         'Stäfa': 'pink',
-        'Wichtig': 'red',
+        'Wichtig': 'brown',
         'Idee': 'gray'
     }
     return color_map.get(category, 'black')  # Standardfarbe ist Schwarz
@@ -76,7 +78,7 @@ def main():
     st.title("Aufgabenliste")
 
     # Erstelle Tabs
-    tab1, tab2, tab3 = st.tabs(["ToDO", "Butge", "Planung"])
+    tab1, tab2, tab3 = st.beta_columns(3)  # Stelle sicher, dass die Tabs nebeneinander angezeigt werden
     with tab1:
         st.header("ToDo")
         tasks = st.session_state.tasks if "tasks" in st.session_state else []
@@ -104,12 +106,11 @@ def main():
         for i, task in enumerate(tasks):
             task_text = task["task"]
             task_done = task["done"]
-            task_category = task["category"]
 
-            task_color = get_category_color(task_category)
+            task_color = get_category_color(task["category"])
 
             st.markdown(f'<p style="color:{task_color};">{task_text}</p>', unsafe_allow_html=True)
-            task_checkbox = st.checkbox(label=f"Erledigt ({task_category})", value=task_done, key=i)
+            task_checkbox = st.checkbox(label=task_text, value=task_done, key=i)
             tasks[i]["done"] = task_checkbox
 
         # Entferne erledigte Aufgaben
@@ -126,7 +127,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 
 
 
