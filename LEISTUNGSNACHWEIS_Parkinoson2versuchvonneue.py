@@ -54,19 +54,19 @@ st.header("{} {}{}".format(text_before, username, text_after))
 
 
 
-import streamlit as st
+
 
 # Die Funktion zum Holen der Farbe basierend auf der Kategorie
 def get_category_color(category):
     # Hier kannst du die Farben für verschiedene Kategorien festlegen
     color_map = {
-        'Studium': 'red',
+        'Studium': 'turquoise',
         'Freizeit': 'green',
         'Zahlen': 'blue',
         'Organisieren': 'orange',
         'Richti': 'purple',
         'Stäfa': 'pink',
-        'Wichtig': 'brown',
+        'Wichtig': 'red',
         'Idee': 'gray'
     }
     return color_map.get(category, 'black')  # Standardfarbe ist Schwarz
