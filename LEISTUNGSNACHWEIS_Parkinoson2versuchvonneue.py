@@ -117,69 +117,58 @@ with tab1:
     st.session_state.tasks = tasks
 
 with tab2:
-
-
     st.header("Budget")
     tab1, tab2, tab3 = st.tabs(["September", "Oktober", "November"])
     with tab1:
-        st.header("Budget")
-        tab1, tab2, tab3 = st.tabs(["September", "Oktober", "November"])
-        with tab1:
-            # Eingabe des Kontostands zu Beginn des Monats
-            kontostand = st.number_input('Kontostand zu Beginn des Monats')
-
-            # Initialisierung der Startbeträge je nach Kategorie
-            start_betrag = {
+        # Initialisierung der Startbeträge je nach Kategorie
+        start_betrag = {
                 'Essen': 150,
                 'Freizeit': 200,
                 'Zug': 50,
                 'Miete': 0,  # Fügen Sie hier den Startbetrag für Miete hinzu
                 'Lohn': 0  # Fügen Sie hier den Startbetrag für Lohn hinzu
-            }
+        }
+        # Initialisierung der Ausgabenliste für jede Kategorie
+        ausgaben = {
+            'Essen': [],
+            'Freizeit': [],
+            'Zug': [],
+            'Miete': [],
+            'Lohn': []}
+        # Auswahl der Kategorie
+        kategorie = st.selectbox(
+            'Was für eine Ausgabe war es?',
+            ('Essen', 'Freizeit', 'Zug', 'Miete', 'Lohn'))
+        # Eingabe des Ausgabebetrags
+        ausgabe_betrag = st.number_input('Ausgabe')
 
-            # Initialisierung der Ausgabenliste für jede Kategorie
-            ausgaben = {
-                'Essen': [],
-                'Freizeit': [],
-                'Zug': [],
-                'Miete': [],
-                'Lohn': []
-            }
+        # Speichern der Ausgaben in der entsprechenden Kategorie
+        if st.button("Speichern", type="primary"):
+            ausgaben[kategorie].append(ausgabe_betrag)
 
-            # Auswahl der Kategorie
-            kategorie = st.selectbox(
-                'Was für eine Ausgabe war es?',
-                ('Essen', 'Freizeit', 'Zug', 'Miete', 'Lohn'))
+        # Anzeigen der Anfangskontostände
+        st.write(f'Anfangskontostand: {start_betrag}')
+        st.write(f'Kontostand nach {kategorie}: {start_betrag[kategorie]}')
+        # Anzeigen der gesamten Ausgaben für jede Kategorie
+        st.write('Gesamte Ausgaben:')
+        for k, v in ausgaben.items():
+            st.write(f'{k}: {sum(v)}')
+        # Berechnung des verbleibenden Kontostands
+        verbleibender_betrag = start_betrag
+        for k, v in ausgaben.items():
+            verbleibender_betrag -= sum(v)
 
-            # Eingabe des Ausgabebetrags
-            ausgabe_betrag = st.number_input('Ausgabe')
+        # Ausgabe des verbleibenden Kontostands
+        st.write(f'Verbleibender Kontostand: {verbleibender_betrag}')
+        
+        # Eingabe des Kontostands zu Beginn des Monats
+        kontostand = st.number_input('Kontostand zu Beginn des Monats')
 
-            # Speichern der Ausgaben in der entsprechenden Kategorie
-            if st.button("Speichern", type="primary"):
-                ausgaben[kategorie].append(ausgabe_betrag)
-
-            # Anzeigen der Anfangskontostände
-            st.write(f'Anfangskontostand: {kontostand}')
-            st.write(f'Kontostand nach {kategorie}: {start_betrag[kategorie]}')
-
-            # Anzeigen der gesamten Ausgaben für jede Kategorie
-            st.write('Gesamte Ausgaben:')
-            for k, v in ausgaben.items():
-                st.write(f'{k}: {sum(v)}')
-
-            # Berechnung des verbleibenden Kontostands
-            verbleibender_betrag = kontostand
-            for k, v in ausgaben.items():
-                verbleibender_betrag -= sum(v)
-
-            # Ausgabe des verbleibenden Kontostands
-            st.write(f'Verbleibender Kontostand: {verbleibender_betrag}')
-
-        with tab2:   
+    with tab2:   
 
            st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
         
-        with tab3:
+    with tab3:
             st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
 
 
