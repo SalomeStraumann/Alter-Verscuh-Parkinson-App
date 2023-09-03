@@ -96,10 +96,10 @@ with tab1:
     task_category = st.selectbox("Kategorie auswählen:", todo)
 
     if st.button("Hinzufügen"):
-    if new_task:
-    tasks.append({"task": new_task, "done": False, "category": task_category})
-    st.session_state.tasks = tasks
-    new_task = ""
+        if new_task:
+        tasks.append({"task": new_task, "done": False, "category": task_category})
+        st.session_state.tasks = tasks
+        new_task = ""
 
     st.write("Aktuelle Aufgaben:")
     for task in tasks:
