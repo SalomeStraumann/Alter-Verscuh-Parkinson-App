@@ -131,7 +131,8 @@ if __name__ == "__main__":
 
 
 
-import streamlit as st
+
+
 
 # Funktion, um die Farbe basierend auf der Kategorie zu erhalten
 def get_category_color(category):
@@ -197,27 +198,16 @@ def main():
     tab1, tab2, tab3 = st.tabs(["Cat", "Dog", "Owl"])
 
     if tab1:
-        todo_tab()
+        cat_tab()
     elif tab2:
-        budget_tab()
+        dog_tab()
     elif tab3:
-        planung_tab()
+        owl_tab()
 
 if __name__ == "__main__":
-    todo = [
-        'Studium',
-        'Freizeit',
-        'Zahlen',
-        'Organisieren',
-        'Richti',
-        'Stäfa',
-        'Wichtig',
-        'Idee'
-    ]
-
     main()
 
-
+    
 
 
 
