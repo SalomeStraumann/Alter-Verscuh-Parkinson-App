@@ -123,7 +123,100 @@ if __name__ == "__main__":
     ]
 
     main()
+import streamlit as st
 
+# Funktion, um die Farbe basierend auf der Kategorie zu erhalten
+def get_category_color(category):
+    # Hier kannst du die Farben für verschiedene Kategorien festlegen
+    color_map = {
+        'Studium': 'brown',
+        'Freizeit': 'green',
+        'Zahlen': 'blue',
+        'Organisieren': 'orange',
+        'Richti': 'purple',
+        'Stäfa': 'pink',
+        'Wichtig': 'red',
+        'Idee': 'gray'
+    }
+    return color_map.get(category, 'black')  # Standardfarbe ist Schwarz
+
+# Funktion für den ToDo-Tab
+def todo_tab():
+    st.header("ToDo")
+
+    tasks = st.session_state.tasks if "tasks" in st.session_state else []
+
+    new_task = st.text_input("Neue Aufgabe hinzufügen:")
+    task_category = st.selectbox("Kategorie auswählen:", todo)  # todo ist die Liste der Kategorien
+
+    if st.button("Hinzufügen"):
+        if new_task:
+            tasks.append({"task": new_task, "done": False, "category": task_category})
+            st.session_state.tasks = tasks
+
+    st.write("Aktuelle Aufgaben:")
+    for i, task in enumerate(tasks):
+        task_text = task["task"]
+        task_done = task["done"]
+        task_category = task["category"]
+
+        task_color = get_category_color(task_category)
+
+        # Verwende Markdown, um die Aufgaben in verschiedenen Farben anzuzeigen
+        st.markdown(f'<p style="color:{task_color};">{task_text}</p>', unsafe_allow_html=True)
+        task_checkbox = st.checkbox(label=f"Erledigt ({task_category})", value=task_done, key=i)
+        tasks[i]["done"] = task_checkbox
+
+    # Entferne erledigte Aufgaben
+    tasks = [task for task in tasks if not task["done"]]
+    st.session_state.tasks = tasks
+
+# Funktion für den Budget-Tab
+def budget_tab():
+    st.header("Budget")
+    # Hier kannst du deinen Code für die Budgetverwaltung einfügen
+
+# Funktion für den Planungs-Tab
+def planung_tab():
+    st.header("Planung")
+    # Hier kannst du deinen Code für die Planungsverwaltung einfügen
+
+# Streamlit-Anwendung
+def main():
+    st.title("Tabbed Streamlit-Anwendung")
+
+    # Liste der Tab-Namen
+    tabs = ["Aufgaben", "Budget", "Planung"]
+    selected_tab = st.radio("Wähle einen Tab:", tabs)
+
+    # Anzeige des ausgewählten Tabs
+    if selected_tab == "Aufgaben":
+        todo_tab()
+    elif selected_tab == "Budget":
+        budget_tab()
+    elif selected_tab == "Planung":
+        planung_tab()
+
+if __name__ == "__main__":
+    todo = [
+        'Studium',
+        'Freizeit',
+        'Zahlen',
+        'Organisieren',
+        'Richti',
+        'Stäfa',
+        'Wichtig',
+        'Idee'
+    ]
+
+    main()
+
+
+
+
+    
+
+    
     
     # Untertitel Seitenleiste - Befinden
     st.header(':blue[todo]')
