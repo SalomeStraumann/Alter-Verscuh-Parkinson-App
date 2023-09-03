@@ -117,7 +117,7 @@ with tab1:
     st.session_state.tasks = tasks
 
 with tab2:
-import streamlit as st
+
 
 st.header("Budget")
 tab1, tab2, tab3 = st.tabs(["September", "Oktober", "November"])
