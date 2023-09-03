@@ -48,10 +48,17 @@ text_before = "Hallo,"
 text_after = "!"
 st.header("{} {}{}".format(text_before, username, text_after))
 
+
+
+
+
+
+
 import streamlit as st
 
-# Definiere die Farbzuordnung für verschiedene Kategorien
+# Die Funktion zum Holen der Farbe basierend auf der Kategorie
 def get_category_color(category):
+    # Hier kannst du die Farben für verschiedene Kategorien festlegen
     color_map = {
         'Studium': 'red',
         'Freizeit': 'green',
@@ -64,47 +71,27 @@ def get_category_color(category):
     }
     return color_map.get(category, 'black')  # Standardfarbe ist Schwarz
 
+# Hauptfunktion zur Erstellung der Streamlit-Oberfläche
 def main():
-    # Liste der verfügbaren Kategorien
-    todo = [
-        'Studium',
-        'Freizeit',
-        'Zahlen',
-        'Organisieren',
-        'Richti',
-        'Stäfa',
-        'Wichtig',
-        'Idee'
-    ]
-
-    # Streamlit-App-Anfang
-    st.title("ToDo-Anwendung")
+    st.title("Aufgabenliste")
 
     # Erstelle Tabs
-    tab1, tab2, tab3 = st.beta_columns(3)  # Verwende beta_columns, um Tabs horizontal anzuzeigen
-    selected_tab = st.session_state.selected_tab if "selected_tab" in st.session_state else "ToDo"
-
+    tab1, tab2, tab3 = st.beta_columns(3)  # Stelle sicher, dass die Tabs nebeneinander angezeigt werden
     with tab1:
-        if st.button("ToDo"):
-            selected_tab = "ToDo"
-            st.session_state.selected_tab = selected_tab
-
-    with tab2:
-        if st.button("Butge"):
-            selected_tab = "Butge"
-            st.session_state.selected_tab = selected_tab
-
-    with tab3:
-        if st.button("Planung"):
-            selected_tab = "Planung"
-            st.session_state.selected_tab = selected_tab
-
-    # Inhalt des ausgewählten Tabs
-    if selected_tab == "ToDo":
         st.header("ToDo")
         tasks = st.session_state.tasks if "tasks" in st.session_state else []
 
         new_task = st.text_input("Neue Aufgabe hinzufügen:")
+        todo = [  # Du musst die todo-Liste hier definieren
+            'Studium',
+            'Freizeit',
+            'Zahlen',
+            'Organisieren',
+            'Richti',
+            'Stäfa',
+            'Wichtig',
+            'Idee'
+        ]
         task_category = st.selectbox("Kategorie auswählen:", todo)
 
         if st.button("Hinzufügen"):
@@ -121,9 +108,7 @@ def main():
 
             task_color = get_category_color(task_category)
 
-            # Verwende markdown, um die Textfarbe basierend auf der Kategorie zu ändern
             st.markdown(f'<p style="color:{task_color};">{task_text}</p>', unsafe_allow_html=True)
-
             task_checkbox = st.checkbox(label=f"Erledigt ({task_category})", value=task_done, key=i)
             tasks[i]["done"] = task_checkbox
 
@@ -131,32 +116,24 @@ def main():
         tasks = [task for task in tasks if not task["done"]]
         st.session_state.tasks = tasks
 
-# Starte die Streamlit-Anwendung
+    with tab2:
+        st.header("Butge")
+        # Hier kannst du den Inhalt des zweiten Tabs hinzufügen
+
+    with tab3:
+        st.header("Planung")
+        # Hier kannst du den Inhalt des dritten Tabs hinzufügen
+
 if __name__ == "__main__":
     main()
 
-    
-    # Untertitel Seitenleiste - Befinden
-    st.header(':blue[todo]')
 
-    kat_farben = {
-    Studim: (':blue[todo]'),
-    Freizeit: (':green[todo]'),
-    Zahlen: (':gray[todo]'),
-    Organisieren : (':violet[todo]'),
-    Richti : (':pink[todo]'),
-    Idee : (':blue[todo]'),
-    Wichtig : (':red[todo]'),
-    Stäfa: (':blue[todo]')
-    }
 
-    st.write(kat_farben)
-# Beschreibungen der Schweregrade werden unter dem Slider angezeigt
-st.write(severity_levels_lim[feeling])
-# Untertitel Seitenleiste - Kommentare
-st.sidebar.header(':blue[Kommentare]')
-# Eingabefeld, um Kommentare hinzuzufügen
-comment = st.sidebar.text_input('Hast du noch weitere relevante Bemerkungen?')
+
+
+
+
+
 
 
 
